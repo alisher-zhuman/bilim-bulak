@@ -8,7 +8,7 @@ import { routing } from "@/i18n/routing";
 import { METADATA } from "@/shared/utils/constants";
 
 const rubik = Montserrat({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["cyrillic"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
   variable: "--font-montserrat",
