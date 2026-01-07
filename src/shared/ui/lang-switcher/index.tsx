@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
@@ -26,7 +25,13 @@ export const LangSwitcher = () => {
       onClick={onToggle}
       className="flex items-center gap-2 cursor-pointer py-3 px-4 md:py-4 md:px-5 rounded-xl bg-zinc-100 text-neutral-500 text-sm md:text-xl font-medium"
     >
-      <Image src={current.icon} alt={current.label} width={22} height={22} />
+      <Image
+        className="w-auto h-auto"
+        src={current.icon}
+        alt={current.label}
+        width={22}
+        height={22}
+      />
 
       <span>{current.label}</span>
     </button>

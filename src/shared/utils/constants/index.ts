@@ -5,7 +5,7 @@ const siteUrl =
   "http://localhost:3000";
 
 export const METADATA: Metadata = {
-  title: "BILIM BULAK",
+  title: "Bilim Bulak",
   description:
     "«Билим Булак» — педагогдорду психологиялык колдоо долбоору. Мектеп жана бала бакча педагогдору үчүн психология жана логопедия багытында тестирлөө жана колдоо.",
   icons: {
