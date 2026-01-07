@@ -64,6 +64,6 @@ export const METADATA: Metadata = {
 };
 
 export const LANGUAGES = [
-  { code: "ru", label: "РУС" },
-  { code: "kg", label: "КЫР" },
+  { code: "ru", label: "РУС", icon: "/icons/ru.svg" },
+  { code: "kg", label: "КЫР", icon: "/icons/kg.svg" },
 ];

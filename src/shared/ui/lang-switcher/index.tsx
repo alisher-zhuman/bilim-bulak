@@ -17,7 +17,7 @@ export const LangSwitcher = () => {
   };
 
   return (
-    <div>
+    <div className="py-4.5 px-5 rounded-xl bg-zinc-100 text-neutral-500 text-xl font-medium">
       {LANGUAGES.map(({ code, label }, i) => (
         <button key={i} onClick={() => onLanguageChange(code)}>
           {label}
