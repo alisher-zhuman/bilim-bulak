@@ -67,3 +67,30 @@ export const LANGUAGES = [
   { code: "ru", label: "РУС", icon: "/icons/ru.svg" },
   { code: "kg", label: "КЫР", icon: "/icons/kg.svg" },
 ];
+
+export const STEPS = [
+  {
+    title: "Катталуу",
+    description:
+      "Телефон номериңиз аркылуу катталып, иштеген мекемеңизди (мектеп же бала бакча) тандайсыз.",
+    icon: "/icons/first-step.svg",
+  },
+  {
+    title: "Тест тапшыруу",
+    description:
+      "Өзүңүздүн эмоционалдык абалыңызды аныктоо үчүн атайын даярдалган суроолорго жооп бересиз.",
+    icon: "/icons/second-step.svg",
+  },
+  {
+    title: "Жыйынтык алуу",
+    description:
+      "Система жоопторуңузду автоматтык түрдө эсептеп, жыйынтыгын көрсөтөт.",
+    icon: "/icons/third-step.svg",
+  },
+  {
+    title: "Жеке сунуштама",
+    description:
+      "Сиздин жыйынтыгыңызга жараша пайдалуу видео курстар жана сунуштар ачылат.",
+    icon: "/icons/fourth-step.svg",
+  },
+];

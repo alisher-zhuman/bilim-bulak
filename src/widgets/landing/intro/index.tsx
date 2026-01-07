@@ -7,7 +7,7 @@ export const Intro = () => {
   const t = useTranslations();
 
   return (
-    <section className="max-w-400 m-auto p-5 flex flex-col items-center justify-center">
+    <section className="max-w-400 m-auto px-5 flex flex-col items-center justify-center mt-8 md:mt-20">
       <h1 className="font-bold text-3xl md:text-5xl text-center">
         {t("Педагогдорду психологиялык")} <br /> {t("колдоо долбоору")}
       </h1>
