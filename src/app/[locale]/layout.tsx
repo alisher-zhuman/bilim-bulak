@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { METADATA } from "@/shared/utils/constants";
+import { METADATA } from "@/shared/lib/utils/constants";
 
 const rubik = Montserrat({
   subsets: ["cyrillic"],

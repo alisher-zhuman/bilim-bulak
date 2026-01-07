@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
-import { LANGUAGES } from "@/shared/utils/constants";
+import { LANGUAGES } from "@/shared/lib/utils/constants";
 
 export const LangSwitcher = () => {
   const router = useRouter();
@@ -16,6 +16,7 @@ export const LangSwitcher = () => {
   const next = LANGUAGES.find((l) => l.code !== current.code) ?? LANGUAGES[0];
 
   const onToggle = () => {
+    sessionStorage.setItem("scrollY", window.scrollY.toString());
     router.replace(pathname.replace(/^\/[a-z]{2}(?=\/|$)/, `/${next.code}`));
   };
 
@@ -26,7 +27,7 @@ export const LangSwitcher = () => {
       className="flex items-center gap-2 cursor-pointer py-3 px-4 md:py-4 md:px-5 rounded-xl bg-zinc-100 text-neutral-500 text-sm md:text-xl font-medium"
     >
       <Image
-        className="w-auto h-auto"
+        className="w-5 h-3 md:w-auto md:h-auto"
         src={current.icon}
         alt={current.label}
         width={22}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { STEPS } from "@/shared/utils/constants";
+import { STEPS } from "@/shared/lib/utils/constants";
 
 export const Steps = () => {
   const t = useTranslations();
