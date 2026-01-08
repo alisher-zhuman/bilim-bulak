@@ -1,14 +1,16 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, InputGroup, Label, TextField } from "@heroui/react";
 import { SignUpFirstStepFormValues } from "@/entities/sign-up/model/types";
 import { SignUpFirstStepSchema } from "@/entities/sign-up/model/schemas";
+import { PhoneInputField } from "@/shared/ui/phone-input-field";
 
 export const SignUpForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<SignUpFirstStepFormValues>({
     resolver: zodResolver(SignUpFirstStepSchema),
@@ -59,28 +61,18 @@ export const SignUpForm = () => {
             Телефон номериңиз
           </Label>
 
-          <InputGroup.Input
-            {...register("phone")}
-            inputMode="tel"
-            autoComplete="tel"
-            onInput={(e) => {
-              const input = e.currentTarget;
-
-              let v = input.value.replace(/[^\d+]/g, "");
-
-              if (!v.startsWith("+996")) {
-                const digits = v.replace(/\D/g, "");
-                const tail = digits.startsWith("996")
-                  ? digits.slice(3)
-                  : digits;
-                v = "+996" + tail;
-              }
-
-              const tail = v.slice(4).replace(/\D/g, "").slice(0, 9);
-              input.value = "+996" + tail;
-            }}
-            className="placeholder:text-[#A9A9A9] focus:border-blue-700 py-3.5 px-4 font-medium text-sm lg:text-xl bg-[#F5F5F5] rounded-lg"
-            placeholder="+996 700 000 000"
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <PhoneInputField
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={!!errors.phone}
+                placeholder="+996 700 000 000"
+              />
+            )}
           />
 
           {errors.phone?.message && (
