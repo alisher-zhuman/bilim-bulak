@@ -1,8 +1,11 @@
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { SignUpForm } from "@/features/sign-up/ui/sign-up-form";
 import { BackButton } from "@/shared/ui/back-button";
-import Image from "next/image";
 
 const SignUp = () => {
+  const t = useTranslations();
+
   return (
     <section className="max-w-400 m-auto p-4 lg:p-5">
       <BackButton />
@@ -19,14 +22,11 @@ const SignUp = () => {
           />
 
           <h2 className="text-3xl font-semibold mt-10 text-center">
-            Билим Булакка кош келиңиз!
+            {t("signUpPage.welcomeTitle")}
           </h2>
 
           <p className="font-medium text-neutral-500 mt-4 text-center text-balance max-w-181">
-            Урматтуу педагог, бул платформа сиздин психологиялык
-            саламаттыгыңызды колдоо максатында түзүлгөн. Сиздин жеке
-            маалыматтарыңыз жана тесттин жыйынтыктары купуя бойдон калат.
-            Сураныч, өзүңүздүн телефон номериңизди так жазыңыз.
+            {t("signUpPage.welcomeText")}
           </p>
         </div>
       </div>

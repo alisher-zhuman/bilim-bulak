@@ -23,7 +23,7 @@ export const Header = () => {
             onClick={navigateToSignUp}
             className="bg-blue-700 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"
           >
-            {t("common.sign_up")}
+            {t("common.signUp")}
           </Button>
         </div>
       </div>
