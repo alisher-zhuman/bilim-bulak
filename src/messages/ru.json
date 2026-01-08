@@ -71,12 +71,17 @@
     "title": "Регистрация",
     "step1": "Шаг 1: Личные данные",
     "fullNameLabel": "ФИО",
-    "fullNamePlaceholder": "Асанов Үсөн Эсенович",
-    "phoneLabel": "Номер телефона"
+    "fullNamePlaceholder": "Иванов Иван Иванович",
+    "phoneLabel": "Номер телефона",
+    "passwordLabel": "Создайте пароль",
+    "confirmPasswordLabel": "Подтвердите пароль"
   },
   "validation": {
     "fullNameMin": "Введите имя (минимум 2 символа)",
     "fullNameMax": "Слишком длинно",
-    "phoneKg": "Номер должен начинаться с 996 и содержать 9 цифр"
+    "phoneKg": "Номер должен начинаться с 996 и содержать 9 цифр",
+    "passwordMin": "Пароль должен быть минимум 6 символов",
+    "passwordMax": "Пароль слишком длинный",
+    "passwordsDontMatch": "Пароли не совпадают"
   }
 }
