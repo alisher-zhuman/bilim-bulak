@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export const step1Schema = z.object({
-  name: z
+export const SignUpFirstStepSchema = z.object({
+  fullName: z
     .string()
     .trim()
     .min(2, "Атыңызды толтуруңуз (минимум 2 тамга)")
@@ -9,5 +9,5 @@ export const step1Schema = z.object({
   phone: z
     .string()
     .trim()
-    .regex(/^\+?\d[\d\s()-]{7,}$/g, "Телефон номерин туура жазыңыз"),
+    .regex(/^\+?\d{8,15}$/, "Телефон номерди туура жазыңыз"),
 });
