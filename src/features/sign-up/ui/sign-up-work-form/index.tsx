@@ -60,10 +60,7 @@ export const SignUpWorkForm = () => {
 
   const onSubmit = (values: SignUpWorkFormValues) => {
     setSecondStep({
-      regionId: values.regionId,
-      districtId: values.districtId,
-      organizationTypeId: values.organizationTypeId,
-      organizationId: values.organizationId,
+      ...values,
     });
 
     console.log(values);
