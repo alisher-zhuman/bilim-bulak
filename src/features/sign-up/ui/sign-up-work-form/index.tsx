@@ -17,7 +17,7 @@ export const SignUpWorkForm = () => {
 
   const { data: regions = [], isPending, isError } = useGetRegions();
 
-  const locale = useLocale();
+  const locale = useLocale() as "kg" | "ru";
 
   const t = useTranslations();
 
