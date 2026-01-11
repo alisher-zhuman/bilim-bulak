@@ -19,6 +19,7 @@ import {
 
 export const SignUpWorkForm = () => {
   const t = useTranslations();
+
   const locale = useLocale() as "kg" | "ru";
 
   const firstStep = useSignUpStore((s) => s.firstStep);
@@ -73,6 +74,7 @@ export const SignUpWorkForm = () => {
       prevRegionId.current = regionId;
       return;
     }
+
     if (prevRegionId.current !== regionId) {
       setValue("districtId", 0);
       setValue("organizationTypeId", 0);
@@ -86,6 +88,7 @@ export const SignUpWorkForm = () => {
       prevDistrictId.current = districtId;
       return;
     }
+
     if (prevDistrictId.current !== districtId) {
       setValue("organizationId", 0);
       prevDistrictId.current = districtId;

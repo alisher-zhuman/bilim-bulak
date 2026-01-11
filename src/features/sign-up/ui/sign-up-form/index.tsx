@@ -16,6 +16,7 @@ import { useBeforeUnload } from "@/shared/lib/hooks/useBeforeUnload";
 
 export const SignUpForm = () => {
   const router = useRouter();
+
   const t = useTranslations();
 
   const firstStep = useSignUpStore((s) => s.firstStep);
