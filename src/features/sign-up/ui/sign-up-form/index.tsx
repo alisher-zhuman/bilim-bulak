@@ -42,7 +42,7 @@ export const SignUpForm = () => {
     mode: "onChange",
   });
 
-  useBeforeUnload({ enabled: isDirty });
+  useBeforeUnload({ enabled: isDirty || !!firstStep });
 
   const termsAccepted = useWatch({ control, name: "termsAccepted" });
   const isContinueDisabled = isSubmitting || !termsAccepted || !isValid;
