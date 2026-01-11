@@ -4,7 +4,7 @@ import {
   getOrganizations,
   getOrganizationTypes,
   getRegions,
-} from "../sign-up/api";
+} from "../api";
 
 export const useGetRegions = () => {
   return useQuery({ queryKey: ["regions"], queryFn: getRegions });
