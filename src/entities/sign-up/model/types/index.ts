@@ -8,6 +8,8 @@ export interface SignUpFirstStepData {
   fullName: string;
   phone: string;
   password: string;
+  confirmPassword: string;
+  termsAccepted: boolean;
 }
 
 export interface SignUpSecondStepData {

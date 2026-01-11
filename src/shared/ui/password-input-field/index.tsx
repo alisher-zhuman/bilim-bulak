@@ -44,7 +44,7 @@ export const PasswordInputField = ({
         <button
           type="button"
           onClick={() => setShow((v) => !v)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
+          className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
           tabIndex={-1}
         >
           {show ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}

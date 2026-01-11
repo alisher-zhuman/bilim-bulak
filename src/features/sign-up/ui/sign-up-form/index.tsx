@@ -1,11 +1,12 @@
 "use client";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Form, cn } from "@heroui/react";
 import { useSignUpStore } from "@/entities/sign-up/model/store";
-import { SignUpFormValues } from "@/entities/sign-up/model/types";
+import type { SignUpFormValues } from "@/entities/sign-up/model/types";
 import { SignUpSchema } from "@/entities/sign-up/model/schemas";
 import { PhoneInputField } from "@/shared/ui/phone-input-field";
 import { TextInputField } from "@/shared/ui/text-input-field";
@@ -14,11 +15,22 @@ import { TermsAcceptedField } from "@/shared/ui/terms-accepted-field";
 import { useBeforeUnload } from "@/shared/lib/hooks/useBeforeUnload";
 
 export const SignUpForm = () => {
+  const router = useRouter();
+  const t = useTranslations();
+
+  const firstStep = useSignUpStore((s) => s.firstStep);
   const setFirstStep = useSignUpStore((s) => s.setFirstStep);
 
-  const router = useRouter();
-
-  const t = useTranslations();
+  const defaultValues = useMemo<SignUpFormValues>(
+    () => ({
+      fullName: firstStep?.fullName ?? "",
+      phone: firstStep?.phone ?? "996",
+      password: firstStep?.password ?? "",
+      confirmPassword: firstStep?.confirmPassword ?? "",
+      termsAccepted: firstStep?.termsAccepted ?? false,
+    }),
+    [firstStep]
+  );
 
   const {
     register,
@@ -27,13 +39,7 @@ export const SignUpForm = () => {
     formState: { errors, isSubmitting, isValid, isDirty },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(SignUpSchema),
-    defaultValues: {
-      fullName: "",
-      phone: "996",
-      password: "",
-      confirmPassword: "",
-      termsAccepted: false,
-    },
+    defaultValues,
     mode: "onChange",
   });
 
@@ -44,9 +50,7 @@ export const SignUpForm = () => {
 
   const onSubmit = async (values: SignUpFormValues) => {
     setFirstStep({
-      fullName: values.fullName,
-      phone: values.phone,
-      password: values.password,
+      ...values,
     });
 
     router.push("/auth/sign-up/work");
