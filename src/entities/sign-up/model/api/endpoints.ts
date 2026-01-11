@@ -1,5 +1,11 @@
 import { api } from "@/shared/api";
-import { DictionaryItem, District, Organization } from "../model/types";
+import {
+  DictionaryItem,
+  District,
+  Organization,
+  RegisterPayload,
+  RegisterResponse,
+} from "../types";
 
 export const getRegions = async (): Promise<DictionaryItem[]> => {
   const { data } = await api.get("/dictionaries/regions");
@@ -23,5 +29,12 @@ export const getOrganizations = async (params: {
   organizationTypeId: number;
 }): Promise<Organization[]> => {
   const { data } = await api.get("/dictionaries/organizations", { params });
+  return data;
+};
+
+export const registerUser = async (
+  payload: RegisterPayload
+): Promise<RegisterResponse> => {
+  const { data } = await api.post<RegisterResponse>("/auth/register", payload);
   return data;
 };

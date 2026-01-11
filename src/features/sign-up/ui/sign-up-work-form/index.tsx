@@ -13,7 +13,7 @@ import {
   useGetDistricts,
   useGetOrganizationTypes,
   useGetOrganizations,
-} from "@/entities/sign-up/queries";
+} from "@/entities/sign-up/model/api/queries";
 
 export const SignUpWorkForm = () => {
   const t = useTranslations();

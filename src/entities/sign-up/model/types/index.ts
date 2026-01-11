@@ -33,3 +33,17 @@ export type Organization = DictionaryItem & {
   districtId: number;
   organizationTypeId: number;
 };
+
+export type RegisterPayload = Pick<
+  SignUpFirstStepData,
+  "fullName" | "phone" | "password"
+> &
+  SignUpSecondStepData;
+
+export type RegisterResponse = {
+  token: string;
+  userId: number;
+  phone: string;
+  fullName: string;
+  role: string;
+};

@@ -1,10 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getDistricts,
   getOrganizations,
   getOrganizationTypes,
   getRegions,
-} from "../api";
+  registerUser,
+} from "./endpoints";
 
 export const useGetRegions = () => {
   return useQuery({ queryKey: ["regions"], queryFn: getRegions });
@@ -30,5 +31,11 @@ export const useGetOrganizations = (
     queryKey: ["organizations", districtId, organizationTypeId],
     queryFn: () => getOrganizations({ districtId, organizationTypeId }),
     enabled: districtId > 0 && organizationTypeId > 0,
+  });
+};
+
+export const useRegister = () => {
+  return useMutation({
+    mutationFn: registerUser,
   });
 };
