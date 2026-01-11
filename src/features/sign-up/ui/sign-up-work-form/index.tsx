@@ -20,6 +20,7 @@ export const SignUpWorkForm = () => {
   const locale = useLocale() as "kg" | "ru";
 
   const setSecondStep = useSignUpStore((s) => s.setSecondStep);
+  const firstStep = useSignUpStore((s) => s.firstStep);
 
   const {
     control,
@@ -55,7 +56,11 @@ export const SignUpWorkForm = () => {
 
   useEffect(() => {
     setValue("organizationId", 0);
-  }, [districtId, organizationId, setValue]);
+  }, [districtId, setValue]);
+
+  useEffect(() => {
+    setValue("organizationId", 0);
+  }, [organizationTypeId, setValue]);
 
   const hasAllSelected =
     regionId > 0 &&
@@ -84,9 +89,19 @@ export const SignUpWorkForm = () => {
     orgTypesBlocked ||
     orgsBlocked;
 
-  const onSubmit = (values: SignUpWorkFormValues) => {
-    setSecondStep({ ...values });
-    console.log(values);
+  const onSubmit = async (values: SignUpWorkFormValues) => {
+    setSecondStep(values);
+
+    if (!firstStep) return;
+
+    const payload = {
+      fullName: firstStep.fullName,
+      phone: firstStep.phone,
+      password: firstStep.password,
+      ...values,
+    };
+
+    console.log("PAYLOAD TO API:", payload);
   };
 
   return (

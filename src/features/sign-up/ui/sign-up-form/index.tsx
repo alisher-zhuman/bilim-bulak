@@ -48,7 +48,7 @@ export const SignUpForm = () => {
   const isContinueDisabled = isSubmitting || !termsAccepted || !isValid;
 
   const onSubmit = async (values: SignUpFormValues) => {
-    setFirstStep({ ...values });
+    setFirstStep(values);
     router.push("/auth/sign-up/work");
   };
 
