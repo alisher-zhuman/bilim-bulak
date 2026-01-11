@@ -13,6 +13,7 @@ import {
   useGetDistricts,
   useGetOrganizationTypes,
   useGetOrganizations,
+  useRegister,
 } from "@/entities/sign-up/model/api/queries";
 
 export const SignUpWorkForm = () => {
@@ -21,6 +22,8 @@ export const SignUpWorkForm = () => {
 
   const setSecondStep = useSignUpStore((s) => s.setSecondStep);
   const firstStep = useSignUpStore((s) => s.firstStep);
+
+  const registerM = useRegister();
 
   const {
     control,
@@ -69,12 +72,9 @@ export const SignUpWorkForm = () => {
     organizationId > 0;
 
   const regionsBlocked = regionsQ.isPending || regionsQ.isError;
-
   const districtsBlocked =
     regionId === 0 || districtsQ.isPending || districtsQ.isError;
-
   const orgTypesBlocked = orgTypesQ.isPending || orgTypesQ.isError;
-
   const orgsBlocked =
     districtId === 0 ||
     organizationTypeId === 0 ||
@@ -83,6 +83,7 @@ export const SignUpWorkForm = () => {
 
   const isContinueDisabled =
     isSubmitting ||
+    registerM.isPending ||
     !hasAllSelected ||
     regionsBlocked ||
     districtsBlocked ||
@@ -101,7 +102,12 @@ export const SignUpWorkForm = () => {
       ...values,
     };
 
-    console.log("PAYLOAD TO API:", payload);
+    try {
+      const res = await registerM.mutateAsync(payload);
+      console.log("REGISTER OK:", res);
+    } catch (e) {
+      console.error("REGISTER ERROR:", e);
+    }
   };
 
   return (
@@ -268,6 +274,24 @@ export const SignUpWorkForm = () => {
           )}
         />
 
+        {registerM.isError && (
+          <div className="mt-1 ml-2 flex items-center gap-2">
+            <p className="text-xs lg:text-sm text-red-500">
+              {t("common.loadError")}
+            </p>
+
+            <Button
+              type="button"
+              onClick={() => registerM.reset()}
+              variant="ghost"
+              size="sm"
+              className="px-0 min-w-0 h-auto text-blue-700 hover:bg-inherit"
+            >
+              {t("common.retry")}
+            </Button>
+          </div>
+        )}
+
         <Button
           type="submit"
           isDisabled={isContinueDisabled}
@@ -278,7 +302,9 @@ export const SignUpWorkForm = () => {
               : "bg-blue-700 text-white"
           )}
         >
-          {t("signUpWorkForm.continue")}
+          {registerM.isPending
+            ? t("common.loading")
+            : t("signUpWorkForm.continue")}
         </Button>
       </Form>
     </div>
