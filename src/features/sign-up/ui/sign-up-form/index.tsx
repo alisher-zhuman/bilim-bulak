@@ -49,7 +49,7 @@ export const SignUpForm = () => {
       password: values.password,
     });
 
-    router.push("/sign-up/work");
+    router.push("/auth/sign-up/work");
   };
 
   return (

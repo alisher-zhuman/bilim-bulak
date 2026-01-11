@@ -1,6 +1,15 @@
+"use client";
+import { useRequireSignUpFirstStep } from "@/features/sign-up/lib/hooks/useRequireSignUpFirstStep";
+import { useBeforeUnload } from "@/shared/lib/hooks/useBeforeUnload";
 import { BackButton } from "@/shared/ui/back-button";
 
 const SignUpWork = () => {
+  useBeforeUnload({ enabled: true });
+
+  const allowed = useRequireSignUpFirstStep({ redirectTo: "/auth/sign-up" });
+
+  if (!allowed) return null;
+
   return (
     <section className="max-w-400 m-auto p-4 lg:p-5">
       <BackButton />
