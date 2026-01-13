@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useSignUpStore } from "@/entities/sign-up/model/store";
 import { formatKgPhone } from "@/shared/lib/utils/helpers";
 import { useVerifyOtp } from "@/entities/otp/model/api/queries";
+import { usePersistentCountdown } from "../../lib/hooks";
 
 const slotClass =
   "w-10 h-10 lg:w-15 lg:h-15 rounded-xl bg-[#F5F5F5] " +
@@ -19,6 +20,14 @@ export const OtpForm = () => {
   const [otp, setOtp] = useState("");
 
   const phoneRaw = useSignUpStore((s) => s.firstStep?.phone);
+
+  const timerKey = `otp_resend_expireAt:${phoneRaw}`;
+
+  const { mmss, isExpired, restart } = usePersistentCountdown({
+    key: timerKey,
+    durationSec: 60,
+  });
+
   const phone = formatKgPhone(phoneRaw);
 
   const t = useTranslations();
@@ -31,7 +40,7 @@ export const OtpForm = () => {
     e.preventDefault();
 
     const payload = {
-      phone,
+      phone: phoneRaw ?? "",
       code: otp,
       type: "REGISTRATION" as const,
     };
@@ -115,13 +124,19 @@ export const OtpForm = () => {
         <div className="flex justify-center">
           <Button
             type="button"
-            onClick={() => console.log("Resend (later)")}
+            onClick={() => {
+              if (!isExpired) return;
+              restart();
+            }}
             variant="ghost"
             size="sm"
+            isDisabled={!isExpired}
             className="px-0 min-w-0 h-auto hover:bg-transparent mt-3 flex items-center justify-center gap-2 font-medium text-sm lg:text-xl"
           >
             <span className="text-neutral-500">{t("otpPage.resendLabel")}</span>
-            <span className="text-blue-700">00:59</span>
+            <span className="text-blue-700">
+              {isExpired ? t("common.retry") : mmss}
+            </span>
           </Button>
         </div>
       </Form>
