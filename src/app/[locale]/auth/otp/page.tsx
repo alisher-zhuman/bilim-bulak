@@ -1,15 +1,33 @@
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { OtpForm } from "@/features/otp/ui/otp-form";
 import { BackButton } from "@/shared/ui/back-button";
 
 const SignUpOtp = () => {
+  const t = useTranslations();
+
   return (
     <section className="max-w-400 m-auto p-4 lg:p-5">
       <BackButton />
 
-      <div className="mt-8 lg:mt-11.5">
-        <h1 className="text-3xl lg:text-4xl font-semibold">OTP</h1>
+      <div className="mt-8 lg:mt-11.5 lg:flex items-start justify-between gap-10 lg:px-20">
+        <OtpForm />
 
-        <div className="mt-8 rounded-2xl bg-[#F5F5F5] p-6 text-neutral-600 font-medium">
-          Бул экран азырынча даяр эмес 🙂 (OTP verify)
+        <div className="flex-col items-center hidden lg:flex">
+          <Image
+            src="/images/otp.webp"
+            alt="Sign Up"
+            width={472}
+            height={472}
+          />
+
+          <h2 className="text-3xl font-semibold mt-10 text-center">
+            {t("otpPage.title")}
+          </h2>
+
+          <p className="font-medium text-neutral-500 mt-4 text-center text-balance max-w-181">
+            {t("otpPage.text")}
+          </p>
         </div>
       </div>
     </section>

@@ -9,7 +9,6 @@ import { useSignUpStore } from "@/entities/sign-up/model/store";
 import type { SignUpFormValues } from "@/entities/sign-up/model/types";
 import { SignUpSchema } from "@/entities/sign-up/model/schemas";
 import { PhoneInputField } from "@/shared/ui/phone-input-field";
-import { TextInputField } from "@/shared/ui/text-input-field";
 import { PasswordInputField } from "@/shared/ui/password-input-field";
 import { TermsAcceptedField } from "@/shared/ui/terms-accepted-field";
 import { useBeforeUnload } from "@/shared/lib/hooks/useBeforeUnload";
