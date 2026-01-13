@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { Toaster } from "sonner";
 import { routing } from "@/i18n/routing";
 import { METADATA } from "@/shared/lib/utils/constants";
 import { QueryProvider } from "./providers/query-provider";
@@ -36,6 +37,8 @@ const LocaleLayout = async ({ children, params }: Readonly<Props>) => {
       <body className="min-h-screen flex flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <QueryProvider>
+            <Toaster position="top-center" />
+
             <main className="flex-1">{children}</main>
           </QueryProvider>
           ;

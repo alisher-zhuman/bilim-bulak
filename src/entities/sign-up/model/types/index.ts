@@ -42,3 +42,5 @@ export type RegisterResponse = {
   phone: string;
   role: string;
 };
+
+export type Locale = "kg" | "ru";
