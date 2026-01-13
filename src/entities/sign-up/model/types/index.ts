@@ -5,7 +5,6 @@ export type SignUpFormValues = z.infer<typeof SignUpSchema>;
 export type SignUpWorkFormValues = z.infer<typeof SignUpWorkSchema>;
 
 export interface SignUpFirstStepData {
-  fullName: string;
   phone: string;
   password: string;
   confirmPassword: string;
@@ -34,16 +33,12 @@ export type Organization = DictionaryItem & {
   organizationTypeId: number;
 };
 
-export type RegisterPayload = Pick<
-  SignUpFirstStepData,
-  "fullName" | "phone" | "password"
-> &
+export type RegisterPayload = Pick<SignUpFirstStepData, "phone" | "password"> &
   SignUpSecondStepData;
 
 export type RegisterResponse = {
   token: string;
   userId: number;
   phone: string;
-  fullName: string;
   role: string;
 };

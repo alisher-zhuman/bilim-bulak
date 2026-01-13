@@ -92,7 +92,6 @@ export const SignUpWorkForm = () => {
     if (!firstStep) return;
 
     const payload = {
-      fullName: firstStep.fullName,
       phone: firstStep.phone,
       password: firstStep.password,
       ...formValues,

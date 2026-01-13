@@ -44,8 +44,6 @@ export const PhoneInputField = ({
   const hasUserDigits =
     libValue.replace(/\D/g, "").slice(KG_PREFIX.length).length > 0;
 
-  console.log(hasUserDigits);
-
   return (
     <div className={cn("flex flex-col", className)}>
       <Label className="w-fit text-sm lg:text-base text-neutral-500 font-medium ml-2">

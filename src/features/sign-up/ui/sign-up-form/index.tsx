@@ -24,7 +24,6 @@ export const SignUpForm = () => {
 
   const defaultValues = useMemo<SignUpFormValues>(
     () => ({
-      fullName: firstStep?.fullName ?? "",
       phone: firstStep?.phone ?? "996",
       password: firstStep?.password ?? "",
       confirmPassword: firstStep?.confirmPassword ?? "",
@@ -67,31 +66,6 @@ export const SignUpForm = () => {
         className="mt-8 lg:mt-10 w-full flex flex-col gap-4 lg:gap-5"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Controller
-          name="fullName"
-          control={control}
-          render={({ field }) => {
-            const { ref: _ref, ...fieldProps } = field;
-
-            return (
-              <TextInputField
-                name="fullName"
-                label={t("signUpForm.fullNameLabel")}
-                errorMessage={
-                  errors.fullName?.message
-                    ? t(errors.fullName.message)
-                    : undefined
-                }
-                inputProps={{
-                  ...fieldProps,
-                  autoComplete: "name",
-                  placeholder: t("signUpForm.fullNamePlaceholder"),
-                }}
-              />
-            );
-          }}
-        />
-
         <Controller
           name="phone"
           control={control}
