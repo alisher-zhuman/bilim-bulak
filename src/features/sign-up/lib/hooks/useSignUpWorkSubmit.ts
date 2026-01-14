@@ -4,12 +4,14 @@ import { toast } from "sonner";
 import { useSignUpStore } from "@/entities/sign-up/model/store";
 import { useRegister } from "@/entities/sign-up/model/api/queries";
 import type { SignUpWorkFormValues } from "@/entities/sign-up/model/types";
+import { useAuthStore } from "@/shared/stores/useAuthStore";
 
 export const useSignUpWorkSubmit = () => {
   const router = useRouter();
 
   const firstStep = useSignUpStore((s) => s.firstStep);
   const setSecondStep = useSignUpStore((s) => s.setSecondStep);
+  const setOtpSession = useAuthStore((s) => s.setOtpSession);
 
   const registerM = useRegister();
 
@@ -29,6 +31,15 @@ export const useSignUpWorkSubmit = () => {
     await toast.promise(registerM.mutateAsync(payload), {
       loading: "Отправляем...",
       success: (res) => {
+        setOtpSession({
+          otpToken: res.token,
+          otpUser: {
+            userId: res.userId,
+            phone: res.phone,
+            role: res.role,
+          },
+        });
+
         router.push("/auth/otp");
         return t("common.codeSent");
       },

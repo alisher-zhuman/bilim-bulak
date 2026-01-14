@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useSignUpStore } from "@/entities/sign-up/model/store";
 import { useVerifyOtp, useResendOtp } from "@/entities/otp/model/api/queries";
 import { formatKgPhone } from "@/shared/lib/utils/helpers";
+import { useAuthStore } from "@/shared/stores/useAuthStore";
 import { usePersistentCountdown } from "./usePersistentCountdown";
 
 export const useOtpForm = () => {
@@ -16,6 +17,7 @@ export const useOtpForm = () => {
   const router = useRouter();
 
   const phoneRaw = useSignUpStore((s) => s.firstStep?.phone) ?? "";
+  const promote = useAuthStore((s) => s.promoteOtpToAuth);
 
   const phone = useMemo(() => formatKgPhone(phoneRaw), [phoneRaw]);
 
@@ -43,7 +45,12 @@ export const useOtpForm = () => {
 
     await toast.promise(verifyM.mutateAsync(payload), {
       loading: t("otpPage.loading"),
-      success: () => t("otpPage.success"),
+      success: () => {
+        promote();
+        router.replace("/dashboard");
+
+        return t("otpPage.success");
+      },
       error: (err) => {
         const msg = err?.response?.data?.message;
 
