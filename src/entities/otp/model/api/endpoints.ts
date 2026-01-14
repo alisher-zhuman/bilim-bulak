@@ -20,7 +20,7 @@ export const verifyOtp = async (
 export const resendOtp = async (
   params: ResendOtpParams
 ): Promise<ResendOtpResponse> => {
-  const { data } = await api.post<ResendOtpResponse>("/auth/resend-otp", {
+  const { data } = await api.post<ResendOtpResponse>("/auth/resend-otp", null, {
     params,
   });
   return data;
