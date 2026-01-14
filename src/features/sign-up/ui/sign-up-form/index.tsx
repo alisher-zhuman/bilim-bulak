@@ -12,6 +12,7 @@ import { PhoneInputField } from "@/shared/ui/phone-input-field";
 import { PasswordInputField } from "@/shared/ui/password-input-field";
 import { TermsAcceptedField } from "@/shared/ui/terms-accepted-field";
 import { useBeforeUnload } from "@/shared/lib/hooks/useBeforeUnload";
+import { useOtpStore } from "@/shared/stores/useOtpStore";
 
 export const SignUpForm = () => {
   const router = useRouter();
@@ -20,6 +21,7 @@ export const SignUpForm = () => {
 
   const firstStep = useSignUpStore((s) => s.firstStep);
   const setFirstStep = useSignUpStore((s) => s.setFirstStep);
+  const setOtpContext = useOtpStore((s) => s.setContext);
 
   const defaultValues = useMemo<SignUpFormValues>(
     () => ({
@@ -48,6 +50,7 @@ export const SignUpForm = () => {
 
   const onSubmit = async (values: SignUpFormValues) => {
     setFirstStep(values);
+    setOtpContext({ phone: values.phone, type: "REGISTRATION" });
     router.push("/auth/sign-up/work");
   };
 

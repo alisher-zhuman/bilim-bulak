@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useSignUpStore } from "@/entities/sign-up/model/store";
 import { formatKgPhone } from "@/shared/lib/utils/helpers";
 import { useVerifyOtp, useResendOtp } from "@/entities/otp/model/api/queries";
-import { usePersistentCountdown } from "../../lib/hooks";
+import { usePersistentCountdown } from "../../lib/hooks/usePersistentCountdown";
 
 const slotClass =
   "w-10 h-10 lg:w-15 lg:h-15 rounded-xl bg-[#F5F5F5] " +
