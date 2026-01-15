@@ -16,6 +16,7 @@ export const Header = () => {
   const logout = useAuthStore((s) => s.logout);
 
   const navigateToSignIn = () => router.push(`/auth/sign-in`);
+  const navigateToProfile = () => router.push("/user/profile");
 
   return (
     <header className="w-full sticky top-0 bg-white z-50">
@@ -28,14 +29,14 @@ export const Header = () => {
               href="/user/tests"
               className="text-sm md:text-xl font-medium text-neutral-500 hover:text-blue-700 transition-all"
             >
-              Тесттер
+              {t("nav.tests")}
             </Link>
 
             <Link
               href="/user/courses"
               className="text-sm md:text-xl font-medium text-neutral-500 hover:text-blue-700 transition-all"
             >
-              Курстар
+              {t("nav.courses")}
             </Link>
           </nav>
         ) : (
@@ -46,10 +47,10 @@ export const Header = () => {
           <LangSwitcher />
 
           <Button
-            onClick={navigateToSignIn}
+            onClick={isAuthed ? navigateToProfile : navigateToSignIn}
             className="bg-blue-700 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"
           >
-            {t("common.login")}
+            {isAuthed ? t("common.profile") : t("common.login")}
           </Button>
         </div>
       </div>
