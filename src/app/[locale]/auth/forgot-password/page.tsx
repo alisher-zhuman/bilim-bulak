@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { ForgotPasswordForm } from "@/features/forgot-password/ui/forgot-password-form";
 import { BackButton } from "@/shared/ui/back-button";
 

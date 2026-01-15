@@ -19,7 +19,7 @@ export const useOtpForm = () => {
 
   const phoneRaw = useSignUpStore((s) => s.firstStep?.phone) ?? "";
   const promote = useAuthStore((s) => s.promoteOtpToAuth);
-  const phoneForgotPassword = useOtpStore((s) => s.context?.phone);
+  const type = useOtpStore((s) => s.context?.type);
 
   const phone = useMemo(() => formatKgPhone(phoneRaw), [phoneRaw]);
 
@@ -48,11 +48,11 @@ export const useOtpForm = () => {
     toast.promise(verifyM.mutateAsync(payload), {
       loading: t("otpPage.loading"),
       success: () => {
-        if (phoneForgotPassword) {
-          router.replace("/auth/forgot-password/new-password");
-        } else {
+        if (type === "REGISTRATION") {
           promote();
           router.replace("/dashboard");
+        } else {
+          router.replace("/auth/forgot-password/new-password");
         }
 
         return t("otpPage.success");
