@@ -21,8 +21,11 @@ api.interceptors.response.use(
   (res) => res,
   (error) => {
     const status = error?.response?.status;
+    const url = error?.config?.url ?? "";
 
-    if (status === 401) {
+    const isLoginRequest = url === "/auth/login";
+
+    if (status === 401 && !isLoginRequest) {
       useAuthStore.getState().logout();
 
       if (typeof window !== "undefined") {

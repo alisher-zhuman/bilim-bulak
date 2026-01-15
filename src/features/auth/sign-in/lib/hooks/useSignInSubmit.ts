@@ -32,8 +32,15 @@ export const useSignInSubmit = () => {
         return t("signInForm.success");
       },
       error: (err) => {
-        const msg = err?.response?.data?.message;
-        return msg ? msg : t("common.requestError");
+        const messsage = err.response.data.message;
+
+        const fallback = t("common.requestError");
+
+        const map: Record<string, string> = {
+          "Invalid credentials": t("auth.invalidCredentials"),
+        };
+
+        return messsage && map[messsage] ? map[messsage] : fallback;
       },
     });
   };

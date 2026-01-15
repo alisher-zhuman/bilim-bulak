@@ -9,7 +9,7 @@ export const Header = () => {
 
   const router = useRouter();
 
-  const navigateToSignUp = () => router.push(`/auth/sign-up`);
+  const navigateToSignIn = () => router.push(`/auth/sign-in`);
 
   return (
     <header className="w-full sticky top-0 bg-white z-50">
@@ -20,10 +20,10 @@ export const Header = () => {
           <LangSwitcher />
 
           <Button
-            onClick={navigateToSignUp}
+            onClick={navigateToSignIn}
             className="bg-blue-700 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"
           >
-            {t("common.signUp")}
+            {t("common.login")}
           </Button>
         </div>
       </div>

@@ -10,7 +10,7 @@ export const Intro = () => {
 
   const t = useTranslations();
 
-  const navigateToSignUp = () => router.push("/auth/sign-up");
+  const navigateToSignIn = () => router.push("/auth/sign-in");
 
   return (
     <section className="max-w-400 m-auto px-4 md:px-5 flex flex-col items-center justify-center mt-8 md:mt-20">
@@ -27,7 +27,7 @@ export const Intro = () => {
       </p>
 
       <Button
-        onClick={navigateToSignUp}
+        onClick={navigateToSignIn}
         className="bg-blue-700 flex items-center gap-2 mt-10 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"
       >
         {t("common.takeTest")} <MoveRight size={24} />
