@@ -1,11 +1,11 @@
 import { api } from "@/shared/api";
+import { RegisterPayload } from "../types";
 import {
+  AuthResponse,
   DictionaryItem,
   District,
   Organization,
-  RegisterPayload,
-} from "../types";
-import { AuthResponse } from "@/shared/types";
+} from "@/shared/types";
 
 export const getRegions = async (): Promise<DictionaryItem[]> => {
   const { data } = await api.get("/dictionaries/regions");

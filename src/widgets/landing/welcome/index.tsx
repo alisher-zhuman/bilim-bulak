@@ -8,7 +8,7 @@ export const Welcome = () => {
   return (
     <h1 className="flex flex-col items-center justify-center">
       <h1 className="font-bold text-3xl md:text-5xl text-center">
-        {t("welcome.title", { name: "Данияр" })}
+        {t("welcome.title")}
       </h1>
 
       <p className="text-center text-balance mt-3 text-sm md:text-xl font-medium text-neutral-500">
