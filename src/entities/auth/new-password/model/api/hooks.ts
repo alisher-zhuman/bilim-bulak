@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { resetUserPassowrd } from "./endpoints";
+import { resetUserPassword } from "./endpoints";
 
-export const useResetPassord = () => {
+export const useResetPassword = () => {
   return useMutation({
-    mutationFn: resetUserPassowrd,
+    mutationFn: resetUserPassword,
   });
 };

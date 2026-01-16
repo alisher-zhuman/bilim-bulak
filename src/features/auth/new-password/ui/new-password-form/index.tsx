@@ -10,7 +10,7 @@ import { NewPasswordFormValues } from "@/entities/auth/new-password/model/types"
 import { NewPasswordSchema } from "@/entities/auth/new-password/model/schemas";
 import { PasswordInputField } from "@/shared/ui/password-input-field";
 import { useOtpStore } from "@/shared/stores/useOtpStore";
-import { useResetPassord } from "@/entities/auth/new-password/model/api/hooks";
+import { useResetPassword } from "@/entities/auth/new-password/model/api/hooks";
 
 export const NewPasswordForm = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ export const NewPasswordForm = () => {
     mode: "onChange",
   });
 
-  const resetM = useResetPassord();
+  const resetM = useResetPassword();
 
   const isContinueDisabled = isSubmitting || !isValid || resetM.isPending;
 
