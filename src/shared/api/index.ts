@@ -15,6 +15,7 @@ const LANG_WHITELIST_PREFIXES = [
   "/dictionaries/districts",
   "/tests",
   "/profile",
+  "/user/courses",
 ];
 
 const shouldAppendLang = (url: string) => {

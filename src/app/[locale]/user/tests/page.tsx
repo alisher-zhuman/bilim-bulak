@@ -1,7 +1,5 @@
 import { UserLayout } from "@/widgets/layout/user-layout";
 
-const Tests = () => {
-  return <UserLayout>Tests</UserLayout>;
-};
+const Tests = () => <UserLayout>Tests</UserLayout>;
 
 export default Tests;

@@ -1,7 +1,10 @@
+import { CoursesList } from "@/widgets/courses/ui/courses-list";
 import { UserLayout } from "@/widgets/layout/user-layout";
 
-const Courses = () => {
-  return <UserLayout>Courses</UserLayout>;
-};
+const Courses = () => (
+  <UserLayout>
+    <CoursesList />
+  </UserLayout>
+);
 
 export default Courses;

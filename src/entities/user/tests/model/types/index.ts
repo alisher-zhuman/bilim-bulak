@@ -1,6 +1,4 @@
-import { Locale } from "@/shared/types";
-
-export type TestStatus = "ACTIVE" | "INACTIVE" | "DRAFT" | string;
+export type TestStatus = "AVAILABLE" | "PAID" | "COMPLETED" | string;
 
 export interface TestItem {
   id: number;
