@@ -1,9 +1,9 @@
 import { UserLayout } from "@/widgets/layout/user-layout";
-import { TestsSection } from "@/features/user/tests/ui/tests-section";
+import { TestsList } from "@/widgets/tests/ui/tests-list";
 
 const Tests = () => (
   <UserLayout>
-    <TestsSection />
+    <TestsList />
   </UserLayout>
 );
 

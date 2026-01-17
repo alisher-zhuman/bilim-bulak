@@ -5,7 +5,7 @@ import { useGetTests } from "@/entities/user/tests/model/api/queries";
 import { ErrorBlock } from "@/shared/ui/error-block";
 import { TestCard } from "@/shared/ui/test-card";
 
-export const TestsSection = () => {
+export const TestsList = () => {
   const { data: tests, isPending, isError, refetch } = useGetTests();
 
   const t = useTranslations();
