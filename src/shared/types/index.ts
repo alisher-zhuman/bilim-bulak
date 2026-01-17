@@ -31,8 +31,7 @@ export interface OtpResponse {
 
 export type DictionaryItem = {
   id: number;
-  nameKg: string;
-  nameRu: string;
+  name: string;
 };
 
 export type District = DictionaryItem & {

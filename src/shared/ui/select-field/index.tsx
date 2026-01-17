@@ -33,10 +33,6 @@ export const SelectField = ({
   retryText,
   className,
 }: Props) => {
-  const getLabel = (o: DictionaryItem) => {
-    return locale === "ru" ? o.nameRu : o.nameKg;
-  };
-
   const selectValue: Key | null = value === 0 ? null : String(value);
 
   const handleChange = (next: Key | null) => {
@@ -82,22 +78,17 @@ export const SelectField = ({
 
         <Select.Popover className="mt-2">
           <ListBox>
-            {options.map((o) => {
-              const text = getLabel(o);
-              const id = String(o.id);
-
-              return (
-                <ListBox.Item
-                  className="text-neutral-600"
-                  key={id}
-                  id={id}
-                  textValue={text}
-                >
-                  {text}
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              );
-            })}
+            {options.map(({ id, name }) => (
+              <ListBox.Item
+                className="text-neutral-600"
+                key={id}
+                id={id}
+                textValue={name}
+              >
+                {name}
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            ))}
           </ListBox>
         </Select.Popover>
       </Select>

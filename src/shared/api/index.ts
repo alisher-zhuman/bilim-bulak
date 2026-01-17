@@ -13,6 +13,8 @@ const LANG_WHITELIST_PREFIXES = [
   "/dictionaries/organizations",
   "/dictionaries/organization-types",
   "/dictionaries/districts",
+  "/tests",
+  "/profile",
 ];
 
 const shouldAppendLang = (url: string) => {
