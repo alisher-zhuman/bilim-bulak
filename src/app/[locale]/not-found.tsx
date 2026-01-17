@@ -1,11 +1,14 @@
 "use client";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/widgets/layout/footer";
 import { Header } from "@/widgets/layout/header";
 import { MobileBottomNav } from "@/widgets/layout/mobile";
 import { useAuthStore } from "@/shared/stores/useAuthStore";
 
 const NotFound = () => {
+  const t = useTranslations();
+
   const isAuthed = useAuthStore((s) => Boolean(s.token));
 
   return (
@@ -21,11 +24,11 @@ const NotFound = () => {
         />
 
         <h1 className="text-2xl font-semibold md:text-4xl md:font-bold text-center">
-          Мындай баракча табылган жок
+          {t("notFound.title")}
         </h1>
 
         <p className="text-neutral-500 font-medium text-sm md:text-xl mt-3 text-center">
-          Сиз издеген баракча өчүрүлгөн же шилтемеси туура эмес.
+          {t("notFound.text")}
         </p>
       </section>
 
