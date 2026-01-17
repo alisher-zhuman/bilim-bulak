@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Button } from "@heroui/react";
+import { Button, Chip } from "@heroui/react";
 import { CircleQuestionMark, Clock } from "lucide-react";
 import { TestItem } from "@/entities/user/tests/model/types";
 
@@ -14,7 +14,9 @@ export const TestCard = ({ test, isPaying = false, onPay }: Props) => {
 
   return (
     <div className="bg-white rounded-3xl max-w-86.5 p-4 md:basis-[calc(50%-1rem)] lg:basis-0 lg:flex-1 h-full flex flex-col">
-      <h3 className="font-semibold text-xl md:text-2xl">{test.title}</h3>
+      <Chip className="w-fit">Доступно</Chip>
+
+      <h3 className="font-semibold mt-2 text-xl md:text-2xl">{test.title}</h3>
 
       <p className="font-medium text-neutral-500 mt-2">{test.description}</p>
 
