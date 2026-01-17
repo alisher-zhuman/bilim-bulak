@@ -7,7 +7,7 @@ import {
 } from "../lib/utils/helpers";
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: "https://bilgirim-backend-production.up.railway.app/api",
   timeout: 15_000,
 });
 
