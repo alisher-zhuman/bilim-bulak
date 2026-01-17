@@ -223,5 +223,10 @@
     "startCta": "Баштоо",
     "minutes": "{value} мүнөт",
     "questions": "{value} суроо"
+  },
+  "coursesPage": {
+    "videosCount": "{value} видео сабак",
+    "openUntil": "{date} чейин ачык",
+    "openCourse": "Курсту ачуу"
   }
 }

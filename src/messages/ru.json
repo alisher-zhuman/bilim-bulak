@@ -223,5 +223,10 @@
     "startCta": "Начать",
     "minutes": "{value} мин",
     "questions": "{value} вопросов"
+  },
+  "coursesPage": {
+    "videosCount": "{value} видеоуроков",
+    "openUntil": "Доступно до {date}",
+    "openCourse": "Открыть курс"
   }
 }

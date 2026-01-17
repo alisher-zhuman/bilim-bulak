@@ -28,12 +28,18 @@ export const CourseCard = ({ course }: Props) => {
       <div className="flex flex-col gap-3 mt-6 font-medium">
         <div className="flex items-center gap-1">
           <SquarePlay size={20} />
-          <span>{course.videosCount} видео сабак</span>
+          <span>
+            {t("coursesPage.videosCount", { value: course.videosCount })}
+          </span>
         </div>
 
         <div className="flex items-center gap-1">
           <Calendar size={20} />
-          <span>{formatDateDDMMYYYY(course.accessDeadline)} чейин ачык</span>
+          <span>
+            {t("coursesPage.openUntil", {
+              date: formatDateDDMMYYYY(course.accessDeadline),
+            })}
+          </span>
         </div>
       </div>
 
@@ -45,7 +51,7 @@ export const CourseCard = ({ course }: Props) => {
           "mt-auto bg-blue-700 rounded-xl w-full font-medium flex items-center justify-center gap-2 text-sm md:text-xl py-3.5 md:py-6"
         )}
       >
-        Курсту ачуу
+        {t("coursesPage.openCourse")}
       </Button>
     </div>
   );
