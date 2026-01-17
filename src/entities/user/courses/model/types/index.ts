@@ -7,3 +7,16 @@ export interface CourseItem {
 }
 
 export type GetCoursesResponse = CourseItem[];
+
+export interface CourseVideoItem {
+  id: number;
+  courseId: number;
+  title: string;
+  url: string;
+  displayOrder: number;
+}
+
+export interface CourseDetailResponse {
+  title: string;
+  videos: CourseVideoItem[];
+}
