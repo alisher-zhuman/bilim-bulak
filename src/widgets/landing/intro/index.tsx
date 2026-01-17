@@ -4,13 +4,16 @@ import { useTranslations } from "next-intl";
 import { Button } from "@heroui/react";
 import { MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/shared/stores/useAuthStore";
 
 export const Intro = () => {
   const router = useRouter();
 
   const t = useTranslations();
 
-  const navigateToSignIn = () => router.push("/auth/sign-in");
+  const isAuthed = useAuthStore((s) => Boolean(s.token));
+
+  const navigateTo = () => router.push(isAuthed ? "/user" : "/auth/sign-in");
 
   return (
     <section className="max-w-400 m-auto px-4 md:px-5 flex flex-col items-center justify-center mt-8 md:mt-20">
@@ -27,7 +30,7 @@ export const Intro = () => {
       </p>
 
       <Button
-        onClick={navigateToSignIn}
+        onClick={navigateTo}
         className="bg-blue-700 flex items-center gap-2 mt-10 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"
       >
         {t("common.takeTest")} <MoveRight size={24} />
