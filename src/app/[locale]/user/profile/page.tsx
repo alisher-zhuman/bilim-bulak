@@ -1,7 +1,6 @@
 import { UserLayout } from "@/widgets/layout/user-layout";
 import { ProfileForm } from "@/features/user/profile/ui/profile-form";
 import Image from "next/image";
-import { LogoutButton } from "@/features/user/profile/ui/logout-button";
 
 const Profile = () => (
   <UserLayout>
