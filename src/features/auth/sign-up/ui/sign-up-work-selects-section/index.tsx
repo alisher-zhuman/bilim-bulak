@@ -2,7 +2,7 @@ import { Controller, type Control } from "react-hook-form";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { SignUpWorkFormValues } from "@/entities/auth/sign-up/model/types";
 import { SelectField } from "@/shared/ui/select-field";
-import { DictionaryItem, District, Locale, Organization } from "@/shared/types";
+import { DictionaryItem, District, Organization } from "@/shared/types";
 
 interface Props {
   control: Control<SignUpWorkFormValues>;

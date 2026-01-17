@@ -1,6 +1,6 @@
 "use client";
 import { Button, Label, ListBox, Select, cn, type Key } from "@heroui/react";
-import { DictionaryItem, Locale } from "@/shared/types";
+import { DictionaryItem } from "@/shared/types";
 
 interface Props {
   label: string;
@@ -79,8 +79,8 @@ export const SelectField = ({
             {options.map(({ id, name }) => (
               <ListBox.Item
                 className="text-neutral-600"
-                key={id}
-                id={id}
+                key={String(id)}
+                id={String(id)}
                 textValue={name}
               >
                 {name}
