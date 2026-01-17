@@ -1,6 +1,8 @@
+"use client";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Button, Chip } from "@heroui/react";
-import { CircleQuestionMark, Clock } from "lucide-react";
+import { Button, Chip, cn } from "@heroui/react";
+import { CircleQuestionMark, Clock, MoveRight } from "lucide-react";
 import {
   TEST_STATUS_CHIP_COLOR,
   TEST_STATUS_I18N_KEY,
@@ -14,9 +16,39 @@ interface Props {
 }
 
 export const TestCard = ({ test, isPaying = false, onPay }: Props) => {
+  const router = useRouter();
+
   const t = useTranslations();
 
   const status = test.status;
+
+  const isAvailable = status === "AVAILABLE";
+  const isPaid = status === "PAID";
+  const isCompleted = status === "COMPLETED";
+
+  const buttonText = isAvailable
+    ? t("testsPage.pay")
+    : isPaid
+    ? t("testsPage.start")
+    : t("testsPage.toCourses");
+
+  const buttonStyle = isAvailable
+    ? { backgroundColor: "#1570EF", color: "#fff" }
+    : isPaid
+    ? { backgroundColor: "#22C55E", color: "#fff" }
+    : { backgroundColor: "#EAEDFF", color: "#1570EF" };
+
+  const handleClick = () => {
+    if (isAvailable) {
+      return onPay(test.id);
+    }
+
+    if (isPaid) {
+      return router.push(`/user/tests/${test.id}`);
+    }
+
+    return router.push("/user/courses");
+  };
 
   return (
     <div className="bg-white rounded-3xl max-w-86.5 p-4 md:basis-[calc(50%-1rem)] lg:basis-0 lg:flex-1 h-full flex flex-col">
@@ -44,18 +76,23 @@ export const TestCard = ({ test, isPaying = false, onPay }: Props) => {
         {t("testsPage.priceLabel")}
         <span className="text-xl md:text-2xl text-blue-700">
           {" "}
-          {test.status === "AVAILABLE" ? `${test.price}с` : "-"}
+          {isAvailable ? `${test.price}с` : "—"}
         </span>
       </p>
 
       <div className="h-5" />
 
       <Button
-        className="bg-blue-700 mt-auto rounded-xl w-full font-medium text-sm md:text-xl py-3.5 md:py-6"
-        isDisabled={isPaying}
-        onClick={() => onPay(test.id)}
+        style={buttonStyle}
+        className={cn(
+          "mt-auto rounded-xl w-full font-medium flex items-center gap-2 text-sm md:text-xl py-3.5 md:py-6"
+        )}
+        isDisabled={isAvailable ? isPaying : false}
+        onClick={handleClick}
       >
-        {isPaying ? t("common.loading") : t("testsPage.pay")}
+        {isAvailable && isPaying ? t("common.loading") : buttonText}
+
+        {isCompleted && <MoveRight />}
       </Button>
     </div>
   );

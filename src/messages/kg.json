@@ -187,7 +187,9 @@
     "pay": "Төлөө",
     "priceLabel": "Баасы:",
     "minutes": "{value} мүнөт",
-    "questions": "{value} суроо"
+    "questions": "{value} суроо",
+    "start": "Баштоо",
+    "toCourses": "Курстарга"
   },
   "payment": {
     "paymentLoading": "Төлөм түзүлүүдө…",

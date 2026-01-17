@@ -187,7 +187,9 @@
     "pay": "Оплатить",
     "priceLabel": "Цена:",
     "minutes": "{value} минут",
-    "questions": "{value} вопросов"
+    "questions": "{value} вопросов",
+    "start": "Начать",
+    "toCourses": "К курсам"
   },
   "payment": {
     "paymentLoading": "Создаем оплату…",
