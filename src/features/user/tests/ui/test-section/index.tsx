@@ -2,11 +2,12 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Button, Modal, Spinner } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { CircleX } from "lucide-react";
-
 import { useGetTest } from "@/entities/user/tests/model/api/queries";
 import { ErrorBlock } from "@/shared/ui/error-block";
+import { TestQuestion } from "../test-question";
+import { TestFinishModal } from "../test-finish-modal";
 
 export const TestSection = () => {
   const t = useTranslations();
@@ -23,7 +24,6 @@ export const TestSection = () => {
   const percent = Math.min(100, Math.max(0, (5 / safeTotal) * 100));
 
   const openFinishModal = () => setIsFinishOpen(true);
-
   const closeFinishModal = () => setIsFinishOpen(false);
 
   const confirmFinish = () => {
@@ -77,57 +77,23 @@ export const TestSection = () => {
               </p>
             </div>
 
-            <div>
-              <h2 className="font-semibold text-base md:text-3xl mt-5 md:mt-10 text-center">
-                Себепсиз тынчсызданам
-              </h2>
+            <TestQuestion />
 
-              
-            </div>
+            <div className="h-5" />
+
+            <Button className="w-full rounded-xl bg-blue-700 text-white font-medium text-sm md:text-xl py-3.5 md:py-4.5 h-fit">
+              {t("signUpForm.continue")}
+            </Button>
           </div>
         </div>
       )}
 
-      <Modal>
-        <Modal.Backdrop
-          variant="blur"
-          isOpen={isFinishOpen}
-          onOpenChange={setIsFinishOpen}
-        >
-          <Modal.Container placement="center">
-            <Modal.Dialog className="rounded-3xl">
-              <Modal.CloseTrigger />
-
-              <Modal.Body style={{ color: "black" }}>
-                <h3 className="font-bold text-xl text-black! md:text-2xl">
-                  {t("tests.finishConfirmTitle")}
-                </h3>
-
-                <p className="mt-2 text-neutral-600 font-medium text-sm md:text-xl">
-                  {t("tests.finishConfirmDesc")}
-                </p>
-
-                <div className="mt-6 flex flex-col gap-2">
-                  <Button
-                    onPress={confirmFinish}
-                    className="w-full rounded-xl bg-blue-700 text-white font-medium text-sm md:text-xl py-3.5 md:py-4.5 h-fit"
-                  >
-                    {t("tests.finishConfirmBtn")}
-                  </Button>
-
-                  <Button
-                    onPress={closeFinishModal}
-                    variant="ghost"
-                    className="w-full rounded-xl font-medium text-sm md:text-xl py-3.5 md:py-4.5 h-fit"
-                  >
-                    {t("common.cancel")}
-                  </Button>
-                </div>
-              </Modal.Body>
-            </Modal.Dialog>
-          </Modal.Container>
-        </Modal.Backdrop>
-      </Modal>
+      <TestFinishModal
+        isOpen={isFinishOpen}
+        onOpenChange={setIsFinishOpen}
+        onConfirm={confirmFinish}
+        onCancel={closeFinishModal}
+      />
     </>
   );
 };
