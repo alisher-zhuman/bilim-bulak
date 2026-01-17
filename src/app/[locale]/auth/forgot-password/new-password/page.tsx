@@ -4,7 +4,7 @@ import { BackButton } from "@/shared/ui/back-button";
 
 const NewPassword = () => {
   return (
-    <section className="max-w-400 m-auto p-4 lg:p-5">
+    <section className="animate-fade-in max-w-400 m-auto p-4 lg:p-5">
       <BackButton />
 
       <div className="mt-8 lg:mt-11.5 flex flex-col items-center justify-between">

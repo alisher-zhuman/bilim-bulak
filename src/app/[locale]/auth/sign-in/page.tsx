@@ -7,7 +7,7 @@ const SignIn = () => {
   const t = useTranslations();
 
   return (
-    <section className="max-w-400 m-auto p-4 lg:p-5">
+    <section className="animate-fade-in max-w-400 m-auto p-4 lg:p-5">
       <BackButton />
 
       <div className="mt-8 lg:mt-11.5 lg:flex items-start justify-between gap-10 lg:px-20">

@@ -16,7 +16,7 @@ export const Intro = () => {
   const navigateTo = () => router.push(isAuthed ? "/user" : "/auth/sign-in");
 
   return (
-    <section className="max-w-400 m-auto px-4 md:px-5 flex flex-col items-center justify-center mt-8 md:mt-20">
+    <section className="animate-fade-in max-w-400 m-auto px-4 md:px-5 flex flex-col items-center justify-center mt-8 md:mt-20">
       <h1 className="font-bold text-3xl md:text-5xl text-center">
         {t("intro.titlePart1")} <br /> {t("intro.titlePart2")}
       </h1>

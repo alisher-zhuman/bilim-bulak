@@ -6,7 +6,7 @@ export const Steps = () => {
   const t = useTranslations();
 
   return (
-    <section className="max-w-400 m-auto px-4 md:px-5 my-14 md:my-20">
+    <section className="animate-fade-in max-w-400 m-auto px-4 md:px-5 my-14 md:my-20">
       <h1 className="text-center font-bold text-3xl md:text-5xl">
         {t("steps.heading.1")} <br />
         <span className="text-blue-700">{t("steps.heading.2")}</span>

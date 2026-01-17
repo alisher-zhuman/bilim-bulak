@@ -15,7 +15,7 @@ const NotFound = () => {
     <>
       <Header />
 
-      <section className="mt-7 px-5 flex flex-col justify-center items-center max-w-400 m-auto">
+      <section className="animate-fade-in mt-7 px-5 flex flex-col justify-center items-center max-w-400 m-auto">
         <Image
           src="/images/not-found.webp"
           alt="Not Found"
