@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/react";
 import { MoveDown } from "lucide-react";
-import { Tests } from "@/features/user/welcome/ui/tests";
+import { IntroTests } from "@/features/user/welcome/ui/intro-tests";
 
 export const Welcome = () => {
   const t = useTranslations();
@@ -28,7 +28,7 @@ export const Welcome = () => {
         {t("common.takeTest")} <MoveDown size={24} />
       </Button>
 
-      <Tests />
+      <IntroTests />
     </section>
   );
 };

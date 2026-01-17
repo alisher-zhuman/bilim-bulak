@@ -9,7 +9,7 @@ interface Props {
   onPay: (testId: number) => void;
 }
 
-export const TestCard = ({ test, isPaying = false, onPay }: Props) => {
+export const IntroTestCard = ({ test, isPaying = false, onPay }: Props) => {
   const t = useTranslations();
 
   return (
