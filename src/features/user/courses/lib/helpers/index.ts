@@ -30,14 +30,6 @@ const getYoutubeId = (url: string): string | null => {
   }
 };
 
-export const getYoutubeThumb = (url: string): string | null => {
-  const id = getYoutubeId(url);
-
-  if (!id) return null;
-
-  return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-};
-
 export const getYoutubeEmbedUrl = (url: string): string | null => {
   const id = getYoutubeId(url);
 
