@@ -7,6 +7,10 @@ import { Tests } from "@/features/welcome/ui/tests";
 export const Welcome = () => {
   const t = useTranslations();
 
+  const scrollToTests = () => {
+    document.getElementById("tests")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="font-bold text-3xl md:text-5xl text-center">
@@ -17,7 +21,10 @@ export const Welcome = () => {
         {t("welcome.text")}
       </p>
 
-      <Button className="bg-blue-700 flex items-center gap-2 mt-10 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit mb-40">
+      <Button
+        onClick={scrollToTests}
+        className="bg-blue-700 flex items-center gap-2 mt-10 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit mb-40"
+      >
         {t("common.takeTest")} <MoveDown size={24} />
       </Button>
 

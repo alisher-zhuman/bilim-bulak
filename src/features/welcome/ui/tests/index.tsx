@@ -7,7 +7,7 @@ import { CircleQuestionMark, Clock } from "lucide-react";
 export const Tests = () => {
   const t = useTranslations();
 
-  const { data: tests, isPending } = useGetTests();
+  const { data: tests, isPending, isError } = useGetTests();
 
   if (isPending) {
     return <Spinner />;
@@ -15,7 +15,7 @@ export const Tests = () => {
 
   return (
     <div>
-      <h2 className="font-bold text-2xl md:text-4xl text-center">
+      <h2 id="tests" className="font-bold text-2xl md:text-4xl text-center">
         {t("testsPage.title")}
       </h2>
 
