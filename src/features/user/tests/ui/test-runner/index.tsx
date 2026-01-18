@@ -105,6 +105,16 @@ export const TestRunner = ({ test, testId }: Props) => {
           />
         </div>
 
+        <div className="flex items-center justify-between w-full mt-3 md:mt-6">
+          <p className="text-sm md:text-2xl font-semibold text-blue-700">
+            {Math.min(currentIndex + 1, safeTotal)} / {safeTotal}
+          </p>
+
+          <p className="text-2xl md:text-4xl font-semibold text-green-500">
+            44:44
+          </p>
+        </div>
+
         <div className="h-10" />
 
         {currentQuestion ? (
