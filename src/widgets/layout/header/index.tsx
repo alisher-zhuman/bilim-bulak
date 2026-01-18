@@ -55,14 +55,7 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           <LangSwitcher />
 
-          {isAuthed ? (
-            <Button
-              onClick={navigateToProfile}
-              className="hidden md:inline-flex bg-blue-700 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"
-            >
-              {t("common.profile")}
-            </Button>
-          ) : (
+          {isAuthed ? null : ( // </Button> //   {t("common.profile")} // > //   className="hidden md:inline-flex bg-blue-700 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit" //   onClick={navigateToProfile} // <Button
             <Button
               onClick={navigateToSignIn}
               className="bg-blue-700 rounded-xl font-medium text-sm md:text-xl py-3 px-4 md:py-4 md:px-5 h-fit w-fit"

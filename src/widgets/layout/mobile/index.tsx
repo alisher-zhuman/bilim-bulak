@@ -46,10 +46,10 @@ export const MobileBottomNav = () => {
           <span>{t("nav.courses")}</span>
         </Link>
 
-        <Link href="/user/profile" className={itemClass("/user/profile")}>
+        {/* <Link href="/user/profile" className={itemClass("/user/profile")}>
           <User className={iconClass("/user/profile")} />
           <span>{t("common.profile")}</span>
-        </Link>
+        </Link> */}
       </div>
     </nav>
   );

@@ -74,7 +74,6 @@ export const STEPS = [
     description: [
       { key: "steps.1.desc.1" },
       { key: "steps.1.desc.2", className: "text-blue-700" },
-      { key: "steps.1.desc.3" },
     ],
     icon: "/icons/first-step.svg",
   },

@@ -35,15 +35,15 @@ export const Footer = () => {
 
             <li className="text-xs md:text-base font-medium text-neutral-500">
               <Link
-                href="https://wa.me/996999555170"
+                href="https://wa.me/996774019942"
                 target="_blank"
                 className="flex items-center gap-2"
               >
-                <MessageCircle className="text-green-500" /> +996 999 555 170
+                <MessageCircle className="text-green-500" /> +996 774 019 942
               </Link>
             </li>
 
-            <li className="text-xs md:text-base font-medium text-neutral-500">
+            {/* <li className="text-xs md:text-base font-medium text-neutral-500">
               <Link
                 href="https://www.instagram.com/bilgirim.akademiya/"
                 target="_blank"
@@ -51,7 +51,7 @@ export const Footer = () => {
               >
                 <Instagram className="text-pink-600" /> bilgirim.akademiya
               </Link>
-            </li>
+            </li> */}
           </ul>
 
           <ul className="flex flex-col gap-4">
