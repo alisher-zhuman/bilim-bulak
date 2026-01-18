@@ -22,21 +22,17 @@ export const CompleteTest = () => {
   const ui = useMemo(() => {
     const level = (result?.severityLevel ?? "low") as SeverityLevel;
 
-    const map: Record<SeverityLevel, { label: string; color: string }> = {
+    const map: Record<SeverityLevel, { color: string }> = {
       low: {
-        label: "Төмөн",
         color: "#22C55E",
       },
       moderate: {
-        label: "Орточо",
         color: "#F59E0B",
       },
       high: {
-        label: "Жогору",
         color: "#FB923C",
       },
       critical: {
-        label: "Өтө жогору",
         color: "#EF4444",
       },
     };
@@ -75,13 +71,14 @@ export const CompleteTest = () => {
           <p className="text-neutral-500 text-sm">Сиздин деңгээл:</p>
 
           <p
+            className="text-center"
             style={{
               fontWeight: 700,
-              fontSize: 48,
+              fontSize: 32,
               color: ui.color,
             }}
           >
-            {ui.label}
+            {result?.categoryName}
           </p>
 
           <p className="text-center text-neutral-500 mt-5">
