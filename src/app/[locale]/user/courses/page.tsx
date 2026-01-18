@@ -29,10 +29,12 @@ const Courses = () => {
         {
           title: "Аффирмациялар",
           text: "нерв системасын чындап бекемдейт, иммунитетти күчөтөт жана эмоционалдык туруктуулукту жогорулатат.",
+          action: "Окуу",
         },
         {
           title: "50 сабактан турган теориялык билим",
           text: "бул билим сизге иш жүзүндө бардык көндүмдөрдү колдонууну үйрөтөт.",
+          action: "Окуу",
         },
       ],
     };
@@ -47,15 +49,17 @@ const Courses = () => {
         {
           title: "Медитация",
           text: "помогает снижать уровень стресса, улучшает концентрацию и внутреннее спокойствие.",
-          action: "Перейти",
+          action: "Читать",
         },
         {
           title: "Аффирмации",
           text: "укрепляют нервную систему, повышают иммунитет и эмоциональную устойчивость.",
+          action: "Читать",
         },
         {
           title: "50 теоретических уроков",
           text: "эти знания помогут применять полученные навыки на практике.",
+          action: "Читать",
         },
       ],
       note: "Наша цель – сделать вас уверенными, сильными и эффективными профессионалами.",
@@ -65,6 +69,7 @@ const Courses = () => {
   }, [locale, t]);
 
   const goMeditation = () => router.push("/user/courses/meditation");
+  const go = () => router.push("/user/courses/meditation");
 
   return (
     <UserLayout>
@@ -106,14 +111,12 @@ const Courses = () => {
                         – <span className="text-neutral-700">{item.text}</span>
                       </div>
 
-                      {item.title === "Медитация" && (
-                        <Button
-                          onClick={goMeditation}
-                          className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-4 py-2"
-                        >
-                          {item.action} <MoveRight size={18} />
-                        </Button>
-                      )}
+                      <Button
+                        onClick={goMeditation}
+                        className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-4 py-2"
+                      >
+                        {item.action} <MoveRight size={18} />
+                      </Button>
                     </div>
                   </div>
                 </div>
