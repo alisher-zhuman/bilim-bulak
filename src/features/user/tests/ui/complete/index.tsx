@@ -7,6 +7,7 @@ import { Button, cn, Spinner } from "@heroui/react";
 import { ErrorBlock } from "@/shared/ui/error-block";
 import { MoveRight } from "lucide-react";
 import { SeverityLevel } from "@/entities/user/tests/model/types";
+import { useTranslations } from "next-intl";
 
 export const CompleteTest = () => {
   const { testId } = useParams<{ testId: string }>();
@@ -18,6 +19,8 @@ export const CompleteTest = () => {
     isError,
     refetch,
   } = useGetTestResult(testId);
+
+  const t = useTranslations();
 
   const ui = useMemo(() => {
     const level = (result?.severityLevel ?? "low") as SeverityLevel;
@@ -63,13 +66,6 @@ export const CompleteTest = () => {
         <div style={{ maxWidth: 472 }} className="flex flex-col items-center">
           <div className="h-5" />
 
-          <p className="text-blue-700 font-bold text-3xl">
-            {result?.scorePercentage}%
-          </p>
-
-          <div className="h-5" />
-          <p className="text-neutral-500 text-sm">Сиздин деңгээл:</p>
-
           <p
             className="text-center"
             style={{
@@ -78,7 +74,7 @@ export const CompleteTest = () => {
               color: ui.color,
             }}
           >
-            {result?.categoryName}
+            {result?.categoryDescription}
           </p>
 
           <p className="text-center text-neutral-500 mt-5">
@@ -92,7 +88,7 @@ export const CompleteTest = () => {
               "w-full h-fit rounded-xl bg-blue-700 text-white font-medium text-sm lg:text-xl py-3 lg:py-4.5"
             )}
           >
-            Курстарга баруу <MoveRight />
+            {t("testsPage.toCourses")} <MoveRight />
           </Button>
         </div>
       )}

@@ -206,7 +206,7 @@
     "minutes": "{value} минут",
     "questions": "{value} вопросов",
     "start": "Начать",
-    "toCourses": "К курсам"
+    "toCourses": "К знаниям"
   },
   "payment": {
     "paymentLoading": "Создаем оплату…",
