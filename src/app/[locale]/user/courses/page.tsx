@@ -3,10 +3,12 @@
 
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Button } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { MoveRight } from "lucide-react";
 import { UserLayout } from "@/widgets/layout/user-layout";
+import { useCheckTestHasCompleted } from "@/entities/user/tests/model/api/queries";
+import { ErrorBlock } from "@/shared/ui/error-block";
 
 const Courses = () => {
   const t = useTranslations();
@@ -108,60 +110,69 @@ const Courses = () => {
     window.open(EXTRA_URL, "_blank", "noopener,noreferrer");
   };
 
+  const { data, isPending, isError, refetch } = useCheckTestHasCompleted();
+
   return (
     <UserLayout>
-      <section className="animate-fade-in max-w-400 m-auto">
-        <h1 className="font-bold text-2xl md:text-4xl leading-tight">
-          {content.title}
-        </h1>
+      {isPending ? (
+        <div className="mt-14 flex items-center justify-center">
+          <Spinner />
+        </div>
+      ) : isError ? (
+        <ErrorBlock refetch={refetch} className="mt-14" />
+      ) : !data?.hasCompletedAnyTest ? (
+        <section className="animate-fade-in max-w-400 m-auto">
+          <h1 className="font-bold text-2xl md:text-4xl leading-tight">
+            {content.title}
+          </h1>
 
-        <div className="h-4" />
+          <div className="h-4" />
 
-        <p className="text-neutral-700 text-sm md:text-xl leading-relaxed">
-          {content.p1}
-        </p>
+          <p className="text-neutral-700 text-sm md:text-xl leading-relaxed">
+            {content.p1}
+          </p>
 
-        <div className="h-6" />
+          <div className="h-6" />
 
-        <div className="rounded-2xl bg-indigo-50 p-4 md:p-6">
-          <h2 className="font-bold text-lg md:text-2xl text-neutral-900">
-            {content.subTitle}
-          </h2>
+          <div className="rounded-2xl bg-indigo-50 p-4 md:p-6">
+            <h2 className="font-bold text-lg md:text-2xl text-neutral-900">
+              {content.subTitle}
+            </h2>
 
-          <div className="mt-4 grid gap-3">
-            {content.items.map((item, idx) => (
-              <div
-                key={item.key}
-                className="bg-white rounded-2xl p-4 md:p-5 border border-indigo-100"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="text-xl md:text-2xl leading-none">
-                    {idx === 0 ? "1️⃣" : idx === 1 ? "2️⃣" : "3️⃣"}
-                  </div>
+            <div className="mt-4 grid gap-3">
+              {content.items.map((item, idx) => (
+                <div
+                  key={item.key}
+                  className="bg-white rounded-2xl p-4 md:p-5 border border-indigo-100"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="text-xl md:text-2xl leading-none">
+                      {idx === 0 ? "1️⃣" : idx === 1 ? "2️⃣" : "3️⃣"}
+                    </div>
 
-                  <div className="flex-1">
-                    <div className="flex flex-col gap-3">
-                      <div className="text-sm md:text-xl leading-relaxed">
-                        <span className="font-semibold text-neutral-900">
-                          {item.title}
-                        </span>{" "}
-                        – <span className="text-neutral-700">{item.text}</span>
+                    <div className="flex-1">
+                      <div className="flex flex-col gap-3">
+                        <div className="text-sm md:text-xl leading-relaxed">
+                          <span className="font-semibold text-neutral-900">
+                            {item.title}
+                          </span>{" "}
+                          –{" "}
+                          <span className="text-neutral-700">{item.text}</span>
+                        </div>
+
+                        <Button
+                          onClick={() => onOpen(item.key)}
+                          className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-4 py-2"
+                        >
+                          {item.action} <MoveRight size={18} />
+                        </Button>
                       </div>
-
-                      <Button
-                        onClick={() => onOpen(item.key)}
-                        className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-4 py-2"
-                      >
-                        {item.action} <MoveRight size={18} />
-                      </Button>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <>
             <div className="h-5" />
             <p className="text-neutral-500 text-sm md:text-xl leading-relaxed">
               {content.note}
@@ -186,9 +197,35 @@ const Courses = () => {
                 {content.extraAction} <MoveRight size={18} />
               </Button>
             </div>
-          </>
-        </div>
-      </section>
+          </div>
+        </section>
+      ) : (
+        <section className="animate-fade-in max-w-400 m-auto px-5">
+          <div className="mt-14 rounded-2xl bg-indigo-50 p-5 md:p-7 text-center">
+            <p className="text-neutral-900 font-semibold text-lg md:text-2xl">
+              {locale === "ru"
+                ? "Сначала пройдите тест"
+                : "Адегенде тесттен өтүңүз"}
+            </p>
+
+            <p className="mt-2 text-neutral-600 text-sm md:text-xl">
+              {locale === "ru"
+                ? "После прохождения теста вам откроются материалы."
+                : "Тесттен өткөндөн кийин материалдар ачылат."}
+            </p>
+
+            <div className="h-4" />
+
+            <Button
+              onClick={() => router.push("/user/tests")}
+              className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-5 py-2"
+            >
+              {locale === "ru" ? "К тестам" : "Тесттерге өтүү"}{" "}
+              <MoveRight size={18} />
+            </Button>
+          </div>
+        </section>
+      )}
     </UserLayout>
   );
 };

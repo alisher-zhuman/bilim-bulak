@@ -43,3 +43,12 @@ export const getTestResult = async (
   );
   return data;
 };
+
+export const checkTestHasCompleted = async (): Promise<{
+  hasCompletedAnyTest: boolean;
+}> => {
+  const { data } = await api.get<{
+    hasCompletedAnyTest: boolean;
+  }>(`/user/tests/has-completed`);
+  return data;
+};

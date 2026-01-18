@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
+  checkTestHasCompleted,
   getTestQuestions,
   getTestResult,
   getTests,
@@ -38,5 +39,12 @@ export const useGetTestResult = (testId: string) => {
     queryKey: ["test", "result", testId],
     queryFn: () => getTestResult(testId),
     enabled: Boolean(testId),
+  });
+};
+
+export const useCheckTestHasCompleted = () => {
+  return useQuery({
+    queryKey: ["test", "has-completed"],
+    queryFn: () => checkTestHasCompleted(),
   });
 };
