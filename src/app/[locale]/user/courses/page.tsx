@@ -41,6 +41,9 @@ const Courses = () => {
         },
       ],
       note: "Биздин максат – сиздерди ишенимдүү, күчтүү жана натыйжалуу адистер кылуу.",
+      extraTitle: "Кошумча пайдалуу маалымат",
+      extraText: "Видеону көрүү үчүн төмөнкү баскычты басыңыз.",
+      extraAction: "Өтүү",
     };
 
     const ru = {
@@ -70,6 +73,9 @@ const Courses = () => {
         },
       ],
       note: "Наша цель – сделать вас уверенными, сильными и эффективными профессионалами.",
+      extraTitle: "Дополнительная полезная информация",
+      extraText: "Нажмите кнопку ниже, чтобы посмотреть видео.",
+      extraAction: "Перейти",
     };
 
     return locale === "ru" ? ru : kg;
@@ -94,6 +100,12 @@ const Courses = () => {
     if (key === "lessons") {
       window.open(LESSONS_URL, "_blank", "noopener,noreferrer");
     }
+  };
+
+  const EXTRA_URL = "https://youtu.be/IOl8VkLD1-I?si=3Fn1lqS3a8cN2oNe";
+
+  const onOpenExtra = () => {
+    window.open(EXTRA_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -154,6 +166,26 @@ const Courses = () => {
             <p className="text-neutral-500 text-sm md:text-xl leading-relaxed">
               {content.note}
             </p>
+
+            <div className="h-6" />
+            <div className="bg-white rounded-2xl p-4 md:p-5 border border-indigo-100">
+              <h3 className="font-bold text-lg md:text-2xl text-neutral-900">
+                {content.extraTitle}
+              </h3>
+
+              <p className="mt-2 text-neutral-700 text-sm md:text-xl leading-relaxed">
+                {content.extraText}
+              </p>
+
+              <div className="h-4" />
+
+              <Button
+                onClick={onOpenExtra}
+                className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-4 py-2"
+              >
+                {content.extraAction} <MoveRight size={18} />
+              </Button>
+            </div>
           </>
         </div>
       </section>
