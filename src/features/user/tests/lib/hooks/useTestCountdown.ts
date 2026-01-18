@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useInterval } from "usehooks-ts";
 
 const pad2 = (n: number) => String(n).padStart(2, "0");
@@ -57,7 +57,6 @@ export const useTestCountdown = ({
     Math.max(0, totalSeconds)
   );
 
-  // init from storage
   useEffect(() => {
     if (!isEnabled) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -80,24 +79,22 @@ export const useTestCountdown = ({
     setSecondsLeft(Math.max(0, totalSeconds));
   }, [isEnabled, key, totalSeconds]);
 
-  // tick (library)
   useInterval(
     () => {
       if (!deadline) return;
-
-      const left = computeLeft(deadline);
-      setSecondsLeft(left);
+      setSecondsLeft(computeLeft(deadline));
     },
     isEnabled && deadline && secondsLeft > 0 ? 1000 : null
   );
 
   const mmss = useMemo(() => formatMMSS(secondsLeft), [secondsLeft]);
+  const isExpired = isEnabled && totalSeconds > 0 && secondsLeft <= 0;
 
-  const clear = () => {
+  const clear = useCallback(() => {
     removeKey(key);
     setDeadline(null);
     setSecondsLeft(Math.max(0, totalSeconds));
-  };
+  }, [key, totalSeconds]);
 
-  return { secondsLeft, mmss, clear };
+  return { secondsLeft, mmss, isExpired, clear };
 };

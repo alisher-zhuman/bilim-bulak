@@ -208,6 +208,7 @@
       "paid": "Оплачено",
       "completed": "Пройдено"
     },
+    "timeoutNotEnoughAnswers": "Время вышло, недостаточно ответов!",
     "finishTest": "Завершить тест",
     "finishConfirmTitle": "Вы точно хотите завершить тест?",
     "finishConfirmDesc": "Если вы завершите тест, ваши ответы не сохранятся.",

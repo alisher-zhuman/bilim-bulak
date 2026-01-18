@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/react";
@@ -27,7 +27,6 @@ export const TestRunner = ({ test, testId }: Props) => {
   const submitMutation = useSubmitTestAnswers();
 
   const questions = test.questions;
-
   const currentQuestion = questions[currentIndex];
 
   const selectedAnswerId = currentQuestion
@@ -35,19 +34,28 @@ export const TestRunner = ({ test, testId }: Props) => {
     : undefined;
 
   const safeTotal = Math.max(1, test.questionCount ?? questions.length ?? 0);
-
   const doneCount = Object.keys(selectedByQuestion).length;
+
   const percent = Math.min(100, Math.max(0, (doneCount / safeTotal) * 100));
 
   const totalSeconds = Math.max(0, (test.timerMinutes ?? 0) * 60);
 
-  const { mmss, clear, secondsLeft } = useTestCountdown({
+  const { mmss, clear, isExpired } = useTestCountdown({
     testId: test.id ?? testId,
     totalSeconds,
     isEnabled: totalSeconds > 0,
   });
 
   const submittedRef = useRef(false);
+
+  const cleanupAndExit = () => {
+    clearTestStart(test.id ?? testId);
+    clear();
+    toast.info(t("tests.timeoutNotEnoughAnswers"));
+
+    // “back, но replace”: уводим на список тестов (без возврата обратно в прохождение)
+    router.replace("/user/tests");
+  };
 
   const submitNow = async () => {
     if (submittedRef.current) return;
@@ -57,6 +65,7 @@ export const TestRunner = ({ test, testId }: Props) => {
 
     const payload = {
       testId: test.id ?? Number(testId),
+      // startedAt оставляю как есть (ты позже можешь убрать из payload, если бэк не требует)
       startedAt: test.startedAt,
       answers: Object.entries(selectedByQuestion).map(
         ([questionId, answerId]) => ({
@@ -82,14 +91,26 @@ export const TestRunner = ({ test, testId }: Props) => {
     });
   };
 
-  // авто-submit по истечению времени
+  // ✅ таймаут логика
   useEffect(() => {
-    if (totalSeconds <= 0) return;
-    if (secondsLeft > 0) return;
+    if (!isExpired) return;
+    if (submittedRef.current) return;
 
+    const ratio = safeTotal > 0 ? doneCount / safeTotal : 0;
+
+    console.log(safeTotal, doneCount);
+
+    // < 30% → просто выходим и чистим
+    if (ratio < 0.3) {
+      submittedRef.current = true; // чтобы не дернулось повторно
+      cleanupAndExit();
+      return;
+    }
+
+    // >= 30% → сабмитим
     submitNow();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [secondsLeft, totalSeconds]);
+  }, [isExpired, doneCount, safeTotal]);
 
   const selectAnswer = (answerId: number) => {
     if (!currentQuestion) return;
@@ -113,7 +134,7 @@ export const TestRunner = ({ test, testId }: Props) => {
       return;
     }
 
-    // last question: сабмитим что есть (даже если последний не выбран)
+    // last question → сабмитим
     submitNow();
   };
 
