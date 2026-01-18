@@ -33,8 +33,6 @@ export const getLangFromHostPath = (): Locale => {
 export const shouldUseLangApi = (url: string) => {
   const path = url.split("?")[0];
 
-  if (path === "/user/tests/submit") return false;
-
   return LANG_WHITELIST_PREFIXES.some((p) => path.startsWith(p));
 };
 
