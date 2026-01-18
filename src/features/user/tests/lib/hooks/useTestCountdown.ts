@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
 import { useInterval } from "usehooks-ts";
 
@@ -85,6 +84,7 @@ export const useTestCountdown = ({
   useInterval(
     () => {
       if (!deadline) return;
+
       const left = computeLeft(deadline);
       setSecondsLeft(left);
     },
@@ -96,6 +96,7 @@ export const useTestCountdown = ({
   const clear = () => {
     removeKey(key);
     setDeadline(null);
+    setSecondsLeft(Math.max(0, totalSeconds));
   };
 
   return { secondsLeft, mmss, clear };

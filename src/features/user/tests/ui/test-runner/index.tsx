@@ -1,15 +1,15 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/react";
+import { toast } from "sonner";
 
 import type { TestStartResponse } from "@/entities/user/tests/model/types";
 import { useSubmitTestAnswers } from "@/entities/user/tests/model/api/queries";
-import { TestQuestion } from "../test-question";
-import { toast } from "sonner";
-import { useTestCountdown } from "../../lib/hooks/useTestCountdown";
 import { clearTestStart } from "@/entities/user/tests/model/storage";
+import { TestQuestion } from "../test-question";
+import { useTestCountdown } from "../../lib/hooks/useTestCountdown";
 
 interface Props {
   test: TestStartResponse;
@@ -23,18 +23,8 @@ export const TestRunner = ({ test, testId }: Props) => {
   >({});
 
   const t = useTranslations();
-
   const router = useRouter();
-
   const submitMutation = useSubmitTestAnswers();
-
-  const totalSeconds = Math.max(0, (test.timerMinutes ?? 0) * 60);
-
-  const { mmss, clear } = useTestCountdown({
-    testId: test.id ?? testId,
-    totalSeconds,
-    isEnabled: totalSeconds > 0,
-  });
 
   const questions = test.questions;
 
@@ -49,27 +39,21 @@ export const TestRunner = ({ test, testId }: Props) => {
   const doneCount = Object.keys(selectedByQuestion).length;
   const percent = Math.min(100, Math.max(0, (doneCount / safeTotal) * 100));
 
-  const selectAnswer = (answerId: number) => {
-    if (!currentQuestion) return;
+  const totalSeconds = Math.max(0, (test.timerMinutes ?? 0) * 60);
 
-    setSelectedByQuestion((prev) => ({
-      ...prev,
-      [currentQuestion.id]: answerId,
-    }));
-  };
+  const { mmss, clear, secondsLeft } = useTestCountdown({
+    testId: test.id ?? testId,
+    totalSeconds,
+    isEnabled: totalSeconds > 0,
+  });
 
-  const goNext = async () => {
-    if (!currentQuestion) return;
+  const submittedRef = useRef(false);
 
-    const picked = selectedByQuestion[currentQuestion.id];
-    if (!picked) return;
+  const submitNow = async () => {
+    if (submittedRef.current) return;
+    if (submitMutation.isPending) return;
 
-    const isLast = currentIndex >= questions.length - 1;
-
-    if (!isLast) {
-      setCurrentIndex((i) => i + 1);
-      return;
-    }
+    submittedRef.current = true;
 
     const payload = {
       testId: test.id ?? Number(testId),
@@ -91,14 +75,53 @@ export const TestRunner = ({ test, testId }: Props) => {
         return t("common.success");
       },
       error: (err) => {
+        submittedRef.current = false;
         const msg = err?.response?.data?.message;
         return msg ? msg : t("common.requestError");
       },
     });
   };
 
+  // авто-submit по истечению времени
+  useEffect(() => {
+    if (totalSeconds <= 0) return;
+    if (secondsLeft > 0) return;
+
+    submitNow();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [secondsLeft, totalSeconds]);
+
+  const selectAnswer = (answerId: number) => {
+    if (!currentQuestion) return;
+
+    setSelectedByQuestion((prev) => ({
+      ...prev,
+      [currentQuestion.id]: answerId,
+    }));
+  };
+
+  const goNext = async () => {
+    if (!currentQuestion) return;
+
+    const isLast = currentIndex >= questions.length - 1;
+
+    if (!isLast) {
+      const picked = selectedByQuestion[currentQuestion.id];
+      if (!picked) return;
+
+      setCurrentIndex((i) => i + 1);
+      return;
+    }
+
+    // last question: сабмитим что есть (даже если последний не выбран)
+    submitNow();
+  };
+
   const isBtnDisabled =
-    !currentQuestion || !selectedAnswerId || submitMutation.isPending;
+    !currentQuestion ||
+    !selectedAnswerId ||
+    submitMutation.isPending ||
+    submittedRef.current;
 
   return (
     <div className="max-w-400 min-h-screen m-auto flex justify-center mt-10">
