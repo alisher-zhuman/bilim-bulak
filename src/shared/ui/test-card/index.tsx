@@ -20,9 +20,7 @@ export const TestCard = ({ test }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { pay } = usePay();
-
   const router = useRouter();
-
   const t = useTranslations();
 
   const status = test.status;
@@ -44,21 +42,26 @@ export const TestCard = ({ test }: Props) => {
     : { backgroundColor: "#EAEDFF", color: "#1570EF" };
 
   const handleClick = () => {
+    // COMPLETED как было
     if (isCompleted) {
-      return router.push("/user/courses");
+      router.push("/user/courses");
+      return;
     }
 
+    // ✅ PAID: вместо модалки — на confirm
+    if (isPaid) {
+      router.push(`/user/tests/${test.id}/confirm`);
+      return;
+    }
+
+    // AVAILABLE как было (модалка)
     setIsModalOpen(true);
   };
 
   const onConfirm = () => {
     setIsModalOpen(false);
 
-    if (isPaid) {
-      router.push(`/user/tests/${test.id}`);
-      return;
-    }
-
+    // тут теперь остаётся только оплата (AVAILABLE)
     pay(test.id);
   };
 
@@ -109,7 +112,8 @@ export const TestCard = ({ test }: Props) => {
         </Button>
       </div>
 
-      {!isCompleted && (
+      {/* ✅ модалка теперь только для AVAILABLE */}
+      {isAvailable && (
         <TestActionModal
           isOpen={isModalOpen}
           onOpenChange={setIsModalOpen}
