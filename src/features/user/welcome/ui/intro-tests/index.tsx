@@ -15,7 +15,7 @@ export const IntroTests = () => {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl md:text-4xl text-center">
+      <h1 id="tests" className="font-bold text-2xl md:text-4xl text-center">
         {t("testsPage.title")}
       </h1>
 

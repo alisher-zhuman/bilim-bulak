@@ -12,7 +12,7 @@ export const TestsList = () => {
 
   return (
     <section className="animate-fade-in">
-      <h2 id="tests" className="font-bold text-2xl md:text-4xl text-center">
+      <h2 className="font-bold text-2xl md:text-4xl text-center">
         {t("testsPage.title")}
       </h2>
 
