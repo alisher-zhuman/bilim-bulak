@@ -48,11 +48,11 @@ export const TermsAcceptedField = <
 
             <p className="text-xs lg:text-sm text-neutral-500 font-medium">
               {t("signUpForm.termsText")} <br />
-              <Link href="/" className="text-blue-700">
+              <Link href="/user/terms" className="text-blue-700">
                 {t("signUpForm.userAgreement")}
               </Link>{" "}
               {t("signUpForm.and")}{" "}
-              <Link href="/" className="text-blue-700">
+              <Link href="/user/privacy" className="text-blue-700">
                 {t("signUpForm.privacyPolicy")}
               </Link>
             </p>
