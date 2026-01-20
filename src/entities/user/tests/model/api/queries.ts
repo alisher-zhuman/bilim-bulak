@@ -12,6 +12,9 @@ export const useGetTests = () => {
   return useQuery({
     queryKey: ["tests"],
     queryFn: () => getTests(),
+    refetchOnWindowFocus: true,
+    refetchOnMount: "always",
+    staleTime: 0,
   });
 };
 
