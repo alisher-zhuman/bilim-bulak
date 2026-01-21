@@ -28,5 +28,5 @@ export const SignUpWorkSchema = z.object({
   regionId: z.number().int().min(1, "validation.regionRequired"),
   districtId: z.number().int().min(1, "validation.districtRequired"),
   organizationTypeId: z.number().int().min(1, "validation.orgTypeRequired"),
-  organizationId: z.number().int().min(1, "validation.organizationRequired"),
+  // organizationId: z.number().int().min(1, "validation.organizationRequired"),
 });

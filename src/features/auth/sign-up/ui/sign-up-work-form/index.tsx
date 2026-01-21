@@ -10,7 +10,6 @@ import { SignUpWorkSelectsSection } from "../sign-up-work-selects-section";
 
 export const SignUpWorkForm = () => {
   const router = useRouter();
-
   const t = useTranslations();
 
   const {
@@ -21,7 +20,6 @@ export const SignUpWorkForm = () => {
     regionId,
     districtId,
     organizationTypeId,
-    organizationId,
   } = useSignUpWorkForm();
 
   const dicts = useDictionaries({
@@ -43,11 +41,9 @@ export const SignUpWorkForm = () => {
     regionId,
     districtId,
     organizationTypeId,
-    organizationId,
     regionsQ: dicts.regionsQ,
     districtsQ: dicts.districtsQ,
     orgTypesQ: dicts.orgTypesQ,
-    orgsQ: dicts.orgsQ,
     isSubmitting,
     isRegisterPending: registerM.isPending,
   });
@@ -78,7 +74,6 @@ export const SignUpWorkForm = () => {
             regionsBlocked: ui.regionsBlocked,
             districtsBlocked: ui.districtsBlocked,
             orgTypesBlocked: ui.orgTypesBlocked,
-            orgsBlocked: ui.orgsBlocked,
           }}
         />
 

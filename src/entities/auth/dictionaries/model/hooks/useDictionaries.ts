@@ -15,7 +15,7 @@ export const useDictionaries = (args: {
   const regionsQ = useGetRegions();
   const districtsQ = useGetDistricts(regionId);
   const orgTypesQ = useGetOrganizationTypes();
-  const orgsQ = useGetOrganizations(districtId, organizationTypeId);
+  // const orgsQ = useGetOrganizations(districtId, organizationTypeId);
 
-  return { regionsQ, districtsQ, orgTypesQ, orgsQ };
+  return { regionsQ, districtsQ, orgTypesQ };
 };

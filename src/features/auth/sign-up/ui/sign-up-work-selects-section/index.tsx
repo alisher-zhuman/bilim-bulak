@@ -14,14 +14,14 @@ interface Props {
     regionsQ: UseQueryResult<DictionaryItem[], unknown>;
     districtsQ: UseQueryResult<District[], unknown>;
     orgTypesQ: UseQueryResult<DictionaryItem[], unknown>;
-    orgsQ: UseQueryResult<Organization[], unknown>;
+    orgsQ?: UseQueryResult<Organization[], unknown>;
   };
   ui: {
     isSubmittingAny: boolean;
     regionsBlocked: boolean;
     districtsBlocked: boolean;
     orgTypesBlocked: boolean;
-    orgsBlocked: boolean;
+    orgsBlocked?: boolean;
   };
 }
 
@@ -48,8 +48,8 @@ export const SignUpWorkSelectsSection = ({
               regionsQ.isPending
                 ? t("common.loading")
                 : regionsQ.isError
-                ? t("common.loadError")
-                : t("signUpWorkForm.regionPlaceholder")
+                  ? t("common.loadError")
+                  : t("signUpWorkForm.regionPlaceholder")
             }
             options={regionsQ.data ?? []}
             value={field.value}
@@ -84,10 +84,10 @@ export const SignUpWorkSelectsSection = ({
               regionId === 0
                 ? t("signUpWorkForm.selectRegionFirst")
                 : districtsQ.isPending
-                ? t("common.loading")
-                : districtsQ.isError
-                ? t("common.loadError")
-                : t("signUpWorkForm.districtPlaceholder")
+                  ? t("common.loading")
+                  : districtsQ.isError
+                    ? t("common.loadError")
+                    : t("signUpWorkForm.districtPlaceholder")
             }
             options={districtsQ.data ?? []}
             value={field.value}
@@ -124,8 +124,8 @@ export const SignUpWorkSelectsSection = ({
               orgTypesQ.isPending
                 ? t("common.loading")
                 : orgTypesQ.isError
-                ? t("common.loadError")
-                : t("signUpWorkForm.orgTypePlaceholder")
+                  ? t("common.loadError")
+                  : t("signUpWorkForm.orgTypePlaceholder")
             }
             options={orgTypesQ.data ?? []}
             value={field.value}
@@ -150,7 +150,7 @@ export const SignUpWorkSelectsSection = ({
         )}
       />
 
-      <Controller
+      {/* <Controller
         name="organizationId"
         control={control}
         render={({ field, fieldState }) => (
@@ -160,10 +160,10 @@ export const SignUpWorkSelectsSection = ({
               districtId === 0 || organizationTypeId === 0
                 ? t("signUpWorkForm.selectDistrictAndTypeFirst")
                 : orgsQ.isPending
-                ? t("common.loading")
-                : orgsQ.isError
-                ? t("common.loadError")
-                : t("signUpWorkForm.organizationPlaceholder")
+                  ? t("common.loading")
+                  : orgsQ.isError
+                    ? t("common.loadError")
+                    : t("signUpWorkForm.organizationPlaceholder")
             }
             options={orgsQ.data ?? []}
             value={field.value}
@@ -191,7 +191,7 @@ export const SignUpWorkSelectsSection = ({
             retryText={t("common.retry")}
           />
         )}
-      />
+      /> */}
     </>
   );
 };

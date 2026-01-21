@@ -15,7 +15,7 @@ export const useSignUpWorkForm = () => {
       regionId: secondStep?.regionId ?? 0,
       districtId: secondStep?.districtId ?? 0,
       organizationTypeId: secondStep?.organizationTypeId ?? 0,
-      organizationId: secondStep?.organizationId ?? 0,
+      // organizationId: secondStep?.organizationId ?? 0,
     }),
     [secondStep]
   );
@@ -40,7 +40,7 @@ export const useSignUpWorkForm = () => {
   const regionId = useWatch({ control, name: "regionId" });
   const districtId = useWatch({ control, name: "districtId" });
   const organizationTypeId = useWatch({ control, name: "organizationTypeId" });
-  const organizationId = useWatch({ control, name: "organizationId" });
+  // const organizationId = useWatch({ control, name: "organizationId" });
 
   return {
     control,
@@ -51,6 +51,6 @@ export const useSignUpWorkForm = () => {
     regionId,
     districtId,
     organizationTypeId,
-    organizationId,
+    // organizationId,
   };
 };

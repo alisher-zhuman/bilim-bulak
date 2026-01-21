@@ -15,9 +15,8 @@ export interface SignUpSecondStepData {
   regionId: number;
   districtId: number;
   organizationTypeId: number;
-  organizationId: number;
+  // organizationId: number;
 }
 
 export type RegisterPayload = Pick<SignUpFirstStepData, "phone" | "password"> &
   SignUpSecondStepData;
-

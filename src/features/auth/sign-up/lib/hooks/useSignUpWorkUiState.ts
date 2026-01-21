@@ -7,11 +7,11 @@ interface Arguments {
   regionId: number;
   districtId: number;
   organizationTypeId: number;
-  organizationId: number;
+  organizationId?: number;
   regionsQ: QueryLike;
   districtsQ: QueryLike;
   orgTypesQ: QueryLike;
-  orgsQ: QueryLike;
+  orgsQ?: QueryLike;
   isSubmitting: boolean;
   isRegisterPending: boolean;
 }
@@ -29,10 +29,7 @@ export const useSignUpWorkUiState = ({
   isRegisterPending,
 }: Arguments) => {
   const hasAllSelected =
-    regionId > 0 &&
-    districtId > 0 &&
-    organizationTypeId > 0 &&
-    organizationId > 0;
+    regionId > 0 && districtId > 0 && organizationTypeId > 0;
 
   const regionsBlocked = regionsQ.isPending || regionsQ.isError;
 
@@ -41,11 +38,7 @@ export const useSignUpWorkUiState = ({
 
   const orgTypesBlocked = orgTypesQ.isPending || orgTypesQ.isError;
 
-  const orgsBlocked =
-    districtId === 0 ||
-    organizationTypeId === 0 ||
-    orgsQ.isPending ||
-    orgsQ.isError;
+  const orgsBlocked = districtId === 0 || organizationTypeId === 0;
 
   const isSubmittingAny = isSubmitting || isRegisterPending;
 
