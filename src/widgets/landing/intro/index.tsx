@@ -20,14 +20,14 @@ export const Intro = () => {
       </h1>
 
       <div className="mt-3 max-w-300 text-neutral-600 text-sm md:text-xl font-medium leading-relaxed">
-        <p className="text-center text-balance">{t("intro.about.p1")}</p>
+        {/* <p className="text-center text-balance">{t("intro.about.p1")}</p> */}
 
-        <p className="mt-4 text-center text-balance">{t("intro.about.p2")}</p>
+        {/* <p className="mt-4 text-center text-balance">{t("intro.about.p2")}</p> */}
 
         <ul className="mt-4 text-center grid gap-2 list-disc list-inside">
           {/* <li>- {t("intro.about.list.testing")}</li> */}
-          <li>- {t("intro.about.list.stress")}</li>
-          <li>- {t("intro.about.list.recommendations")}</li>
+          {/* <li>- {t("intro.about.list.stress")}</li> */}
+          {/* <li>- {t("intro.about.list.recommendations")}</li> */}
           {/* <li>- {t("intro.about.list.training")}</li> */}
         </ul>
 

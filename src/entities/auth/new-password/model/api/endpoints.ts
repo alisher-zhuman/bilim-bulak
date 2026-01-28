@@ -5,7 +5,7 @@ export const resetUserPassword = async (
   payload: ResetPasswordPayload
 ): Promise<ResetPasswordResponse> => {
   const { data } = await api.post<ResetPasswordResponse>(
-    "/auth/login",
+    "/auth/reset-password",
     payload
   );
 
