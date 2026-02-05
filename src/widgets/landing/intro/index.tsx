@@ -31,11 +31,36 @@ export const Intro = () => {
           {/* <li>- {t("intro.about.list.training")}</li> */}
         </ul>
 
-        <div className="mt-5 rounded-2xl text-center bg-indigo-50 px-4 py-3">
-          <p className="font-semibold text-neutral-800">
-            {t("intro.goal.title")}
+        <div className="mt-5 rounded-2xl text-left bg-indigo-50 px-4 py-4 md:px-6 md:py-6 space-y-4">
+          <p className="font-medium text-neutral-800">
+            {t("intro.goal.agreement")}
           </p>
-          <p className="mt-1 text-neutral-700">{t("intro.goal.text")}</p>
+
+          <div>
+            <h3 className="font-bold text-neutral-900">
+              {t("intro.goal.academyInfoTitle")}
+            </h3>
+            <p className="mt-1 text-neutral-700">
+              {t("intro.goal.academyInfoText")}
+            </p>
+          </div>
+
+          <p className="font-semibold text-indigo-700">
+            {t("intro.goal.academyGoal")}
+          </p>
+
+          <p className="text-neutral-700">{t("intro.goal.pilotProject")}</p>
+
+          <p className="text-neutral-700 italic">
+            {t("intro.goal.mentalHealthFocus")}
+          </p>
+
+          <div>
+            <h3 className="font-bold text-neutral-900">
+              {t("intro.goal.procedureTitle")}
+            </h3>
+            <p className="mt-1 text-neutral-700">{t("intro.goal.pricing")}</p>
+          </div>
         </div>
       </div>
 
