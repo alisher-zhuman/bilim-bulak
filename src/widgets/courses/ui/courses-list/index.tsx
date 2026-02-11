@@ -7,13 +7,12 @@ import { ErrorBlock } from "@/shared/ui/error-block";
 
 export const CoursesList = () => {
   const { data: courses, isPending, isError, refetch } = useGetCourses();
-
-  const t = useTranslations();
+  const t = useTranslations("coursesList");
 
   return (
     <section className="animate-fade-in">
       <h1 className="font-bold text-2xl md:text-4xl text-center">
-        Менин курстарым
+        {t("title")}
       </h1>
 
       {isPending ? (

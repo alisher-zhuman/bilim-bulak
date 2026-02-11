@@ -1,7 +1,6 @@
 // app/user/courses/page.tsx
 "use client";
 
-import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button, Spinner } from "@heroui/react";
 import { useRouter } from "next/navigation";
@@ -10,78 +9,34 @@ import { UserLayout } from "@/widgets/layout/user-layout";
 import { useCheckTestHasCompleted } from "@/entities/user/tests/model/api/queries";
 import { ErrorBlock } from "@/shared/ui/error-block";
 
+type CourseItem = {
+  key: "meditation" | "affirmations" | "lessons";
+  title: string;
+  text: string;
+  action: string;
+};
+
+type CoursesContent = {
+  title: string;
+  p1: string;
+  subTitle: string;
+  items: CourseItem[];
+  note: string;
+  extraTitle: string;
+  extraText: string;
+  extraAction: string;
+  locked: {
+    title: string;
+    text: string;
+    action: string;
+  };
+};
+
 const Courses = () => {
-  const t = useTranslations();
+  const t = useTranslations("coursesPage");
   const locale = useLocale();
   const router = useRouter();
-
-  const content = useMemo(() => {
-    const kg = {
-      title: "Урматтуу эжеке-агайлар!",
-      p1:
-        "Биз сиздерге профессионалдуу жардам бере турган сабактар менен толук камсыз кылууга даярбыз. " +
-        "Бул сабактардан алган билимиңизди теориялык жана практикалык жактан колдонуп, күнүмдүк ишиңизде натыйжалуулугун арттыра аласыз.",
-      subTitle: "Сиздерге сунуш кыла турган маалыматтар үч бөлүктөн турат:",
-      items: [
-        {
-          key: "meditation",
-          title: "Медитация",
-          text: "стресстин деңгээлин төмөндөтүүгө жардам берет, ички тынчтыкты жана концентрацияны күчөтөт.",
-          action: "Окуу",
-        },
-        {
-          key: "affirmations",
-          title: "Аффирмациялар",
-          text: "нерв системасын чындап бекемдейт, иммунитетти күчөтөт жана эмоционалдык туруктуулукту жогорулатат.",
-          action: "Окуу",
-        },
-        {
-          key: "lessons",
-          title: "50 сабактан турган теориялык билим",
-          text: "бул билим сизге иш жүзүндө бардык көндүмдөрдү колдонууну үйрөтөт.",
-          action: "Окуу",
-        },
-      ],
-      note: "Биздин максат – сиздерди ишенимдүү, күчтүү жана натыйжалуу адистер кылуу.",
-      extraTitle: "Кошумча пайдалуу маалымат",
-      extraText: "Видеону көрүү үчүн төмөнкү баскычты басыңыз.",
-      extraAction: "Өтүү",
-    };
-
-    const ru = {
-      title: "Уважаемые учителя!",
-      p1:
-        "Мы готовы предоставить вам профессиональные занятия, которые окажут практическую и теоретическую помощь. " +
-        "Полученные знания вы сможете использовать как в теории, так и на практике, повышая эффективность своей работы.",
-      subTitle: "Информация представлена в трёх ключевых блоках:",
-      items: [
-        {
-          key: "meditation",
-          title: "Медитация",
-          text: "помогает снижать уровень стресса, улучшает концентрацию и внутреннее спокойствие.",
-          action: "Читать",
-        },
-        {
-          key: "affirmations",
-          title: "Аффирмации",
-          text: "укрепляют нервную систему, повышают иммунитет и эмоциональную устойчивость.",
-          action: "Читать",
-        },
-        {
-          key: "lessons",
-          title: "50 теоретических уроков",
-          text: "эти знания помогут применять полученные навыки на практике.",
-          action: "Читать",
-        },
-      ],
-      note: "Наша цель – сделать вас уверенными, сильными и эффективными профессионалами.",
-      extraTitle: "Дополнительная полезная информация",
-      extraText: "Нажмите кнопку ниже, чтобы посмотреть видео.",
-      extraAction: "Перейти",
-    };
-
-    return locale === "ru" ? ru : kg;
-  }, [locale, t]);
+  const content = t.raw("content") as CoursesContent;
 
   const LESSONS_URL =
     locale === "ru"
@@ -203,15 +158,11 @@ const Courses = () => {
         <section className="animate-fade-in max-w-400 m-auto px-5">
           <div className="mt-14 rounded-2xl bg-indigo-50 p-5 md:p-7 text-center">
             <p className="text-neutral-900 font-semibold text-lg md:text-2xl">
-              {locale === "ru"
-                ? "Сначала пройдите тест"
-                : "Адегенде тесттен өтүңүз"}
+              {content.locked.title}
             </p>
 
             <p className="mt-2 text-neutral-600 text-sm md:text-xl">
-              {locale === "ru"
-                ? "После прохождения теста вам откроются материалы."
-                : "Тесттен өткөндөн кийин материалдар ачылат."}
+              {content.locked.text}
             </p>
 
             <div className="h-4" />
@@ -220,7 +171,7 @@ const Courses = () => {
               onClick={() => router.push("/user/tests")}
               className="rounded-xl bg-blue-700 text-white font-medium text-sm md:text-lg h-fit px-5 py-2"
             >
-              {locale === "ru" ? "К тестам" : "Тесттерге өтүү"}{" "}
+              {content.locked.action}{" "}
               <MoveRight size={18} />
             </Button>
           </div>

@@ -94,7 +94,7 @@ export const TestCard = ({ test }: Props) => {
           {t("testsPage.priceLabel")}
           <span className="text-xl md:text-2xl text-blue-700">
             {" "}
-            {isAvailable ? `${test.price}сом` : "—"}
+            {isAvailable ? t("testsPage.priceValue", { value: test.price }) : "—"}
           </span>
         </p>
 

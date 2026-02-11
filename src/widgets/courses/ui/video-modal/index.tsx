@@ -1,4 +1,5 @@
 import { Modal } from "@heroui/react";
+import { useTranslations } from "next-intl";
 import { getYoutubeEmbedUrl } from "@/features/user/courses/lib/helpers";
 import { CourseVideoItem } from "@/entities/user/courses/model/types";
 
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const VideoModal = ({ isOpen, onOpenChange, video }: Props) => {
+  const t = useTranslations("videoModal");
+
   const embedUrl = video ? getYoutubeEmbedUrl(video.url) : null;
 
   return (
@@ -34,14 +37,14 @@ export const VideoModal = ({ isOpen, onOpenChange, video }: Props) => {
                     key={embedUrl}
                     src={embedUrl}
                     height={250}
-                    title={video?.title ?? "Video"}
+                    title={video?.title ?? t("fallbackTitle")}
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-white/70">
-                    Видео недоступно
+                    {t("unavailable")}
                   </div>
                 )}
               </div>

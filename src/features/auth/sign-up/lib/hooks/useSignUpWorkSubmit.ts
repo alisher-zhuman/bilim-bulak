@@ -29,7 +29,7 @@ export const useSignUpWorkSubmit = () => {
     };
 
     toast.promise(registerM.mutateAsync(payload), {
-      loading: "Отправляем...",
+      loading: t("common.sending"),
       success: (res) => {
         setOtpSession({
           otpToken: res.token,
