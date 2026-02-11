@@ -9,14 +9,14 @@ import { UserLayout } from "@/widgets/layout/user-layout";
 import { useCheckTestHasCompleted } from "@/entities/user/tests/model/api/queries";
 import { ErrorBlock } from "@/shared/ui/error-block";
 
-type CourseItem = {
+interface CourseItem {
   key: "meditation" | "affirmations" | "lessons";
   title: string;
   text: string;
   action: string;
-};
+}
 
-type CoursesContent = {
+interface CoursesContent {
   title: string;
   p1: string;
   subTitle: string;
@@ -30,7 +30,7 @@ type CoursesContent = {
     text: string;
     action: string;
   };
-};
+}
 
 const Courses = () => {
   const t = useTranslations("coursesPage");

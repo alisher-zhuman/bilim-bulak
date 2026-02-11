@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl";
 import { UserLayout } from "@/widgets/layout/user-layout";
 import { BackButton } from "@/shared/ui/back-button";
 
-type Block = {
+interface Block {
   h: string;
   p?: string;
   ul?: string[];
   ol?: string[];
   note?: string;
-};
+}
 
 const Affirmations = () => {
   const t = useTranslations("affirmationsPage");

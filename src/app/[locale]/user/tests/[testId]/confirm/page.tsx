@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Button, cn } from "@heroui/react";
 import { useRequireAuth } from "@/shared/lib/hooks/useRequireAuth";
 
-type ConfirmContent = {
+interface ConfirmContent {
   warning: string;
   title: string;
   p1: string;
@@ -19,7 +19,7 @@ type ConfirmContent = {
   no: string;
   note: string;
   note2: string;
-};
+}
 
 const Confirm = () => {
   const { ready, isAuthed } = useRequireAuth();

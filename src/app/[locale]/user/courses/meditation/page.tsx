@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl";
 import { UserLayout } from "@/widgets/layout/user-layout";
 import { BackButton } from "@/shared/ui/back-button";
 
-type Block = {
+interface Block {
   h: string;
   p?: string;
   ul?: string[];
   ol?: string[];
   note?: string;
-};
+}
 
 const Meditation = () => {
   const t = useTranslations("meditationPage");
@@ -35,28 +35,26 @@ const Meditation = () => {
                 {b.h}
               </h2>
 
-              {"p" in b && b.p ? <p className="mt-3">{(b as any).p}</p> : null}
+              {b.p ? <p className="mt-3">{b.p}</p> : null}
 
-              {"ul" in b && (b as any).ul?.length ? (
+              {b.ul?.length ? (
                 <ul className="mt-3 list-disc pl-5 space-y-1">
-                  {(b as any).ul.map((x: string, i: number) => (
+                  {b.ul.map((x, i) => (
                     <li key={i}>{x}</li>
                   ))}
                 </ul>
               ) : null}
 
-              {"ol" in b && (b as any).ol?.length ? (
+              {b.ol?.length ? (
                 <ol className="mt-3 list-decimal pl-5 space-y-1">
-                  {(b as any).ol.map((x: string, i: number) => (
+                  {b.ol.map((x, i) => (
                     <li key={i}>{x}</li>
                   ))}
                 </ol>
               ) : null}
 
-              {"note" in b && (b as any).note ? (
-                <p className="mt-4 font-medium text-neutral-900">
-                  {(b as any).note}
-                </p>
+              {b.note ? (
+                <p className="mt-4 font-medium text-neutral-900">{b.note}</p>
               ) : null}
             </div>
           ))}
